@@ -49,7 +49,7 @@ def handle_text_message(event):
 def handle_image_message(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextMessage(''))
+        TextSendMessage('画像ファイルです'))
 
 if __name__ == "__main__":
 #    app.run()
