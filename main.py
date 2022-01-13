@@ -47,10 +47,6 @@ def handle_text_message(event):
         line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage('どういたしまして'))
-    elif '予定' in event.message.text:
-        line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage('予定を答えます'))
     else:
         line_bot_api.reply_message(
         event.reply_token,
