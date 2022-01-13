@@ -41,7 +41,12 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
-    line_bot_api.reply_message(
+    if event.message.text == 'ありがとう':
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage('どういたしまして'))
+    else:
+        line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
 
@@ -49,7 +54,7 @@ def handle_text_message(event):
 def handle_image_message(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage('画像ファイルです'))
+        TextSendMessage('いい写真ですね。'))
 
 if __name__ == "__main__":
 #    app.run()
