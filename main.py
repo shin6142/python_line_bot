@@ -12,6 +12,8 @@ from linebot.models import (
 )
 import os
 
+from g_calender_api import GetEvent
+
 app = Flask(__name__)
 
 #環境変数取得
@@ -45,6 +47,10 @@ def handle_text_message(event):
         line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage('どういたしまして'))
+    elif '予定' in event.message.text:
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage('予定を答えます'))
     else:
         line_bot_api.reply_message(
         event.reply_token,
@@ -54,7 +60,10 @@ def handle_text_message(event):
 def handle_image_message(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage('いい写真ですね。'))
+        TextSendMessage('いい写真ですね'))
+
+
+
 
 if __name__ == "__main__":
 #    app.run()
