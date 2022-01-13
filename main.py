@@ -45,12 +45,12 @@ def callback():
 def handle_text_message(event):
     if event.message.text == 'ありがとう':
         line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage('どういたしまして'))
+            event.reply_token,
+            TextSendMessage('どういたしまして'))
     else:
         line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
+            event.reply_token,
+            TextSendMessage(text=event.message.text))
 
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image_message(event):
