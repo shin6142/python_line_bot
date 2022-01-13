@@ -12,7 +12,6 @@ from linebot.models import (
 )
 import os
 
-from g_calender_api import GetEvent
 
 app = Flask(__name__)
 
