@@ -40,6 +40,13 @@ def callback():
     return 'OK'
 
 
+@app.route("/<username>")
+def notify(username):
+    user_id = "09065906142"
+    line_bot_api.push_message(user_id, messages=username)
+
+
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_text_message(event):
     if event.message.text == 'ありがとう':
