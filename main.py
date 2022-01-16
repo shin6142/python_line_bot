@@ -45,7 +45,7 @@ def callback():
 def send_message(username):
     messages = TextSendMessage(text=username)
     line_bot_api.broadcast(messages=messages)
-    line_bot_api.push_message('09065906142', TextSendMessage(text='Hello World!'))
+    line_bot_api.push_message(MY_LINE_ID, TextSendMessage(text='Hello World!'))
 
 
 @handler.add(MessageEvent, message=TextMessage)
