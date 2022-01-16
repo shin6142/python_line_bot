@@ -45,6 +45,7 @@ def send_message(username):
     messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
     # line_bot_api.broadcast(messages=messages)
     line_bot_api.push_message(MY_LINE_ID, messages)
+    return messages
 
 
 @handler.add(MessageEvent, message=TextMessage)
