@@ -1,4 +1,4 @@
-from flask import Flask, request, abort
+from flask import Flask, request, abort, render_template
 
 from linebot import (
     LineBotApi, WebhookHandler
@@ -42,11 +42,11 @@ def callback():
 
 @app.route("/<username>")
 def send_message(username):
-    messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
-    # line_bot_api.broadcast(messages=messages)
     if username != 'favicon.ico':
+        messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
+        # line_bot_api.broadcast(messages=messages)
         line_bot_api.push_message(MY_LINE_ID, messages)
-    return messages
+    return render_template("index.html")
 
 
 @handler.add(MessageEvent, message=TextMessage)
