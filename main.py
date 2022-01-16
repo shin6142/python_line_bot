@@ -43,8 +43,7 @@ def callback():
 
 @app.route("/<username>")
 def notify(username):
-    user_id = MY_LINE_ID
-    line_bot_api.push_message(user_id, messages=username)
+    return username
 
 
 
