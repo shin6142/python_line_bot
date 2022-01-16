@@ -44,7 +44,8 @@ def callback():
 def send_message(username):
     messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
     # line_bot_api.broadcast(messages=messages)
-    line_bot_api.push_message(MY_LINE_ID, messages)
+    if username != 'favicon.ico':
+        line_bot_api.push_message(MY_LINE_ID, messages)
     return messages
 
 
