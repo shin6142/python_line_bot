@@ -42,8 +42,9 @@ def callback():
 
 
 @app.route("/<username>")
-def notify(username):
-    return username
+def send_message(username):
+    messages = TextSendMessage(text=username)
+    line_bot_api.broadcast(messages=messages)
 
 
 
