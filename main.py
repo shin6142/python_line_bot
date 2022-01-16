@@ -43,8 +43,8 @@ def callback():
 @app.route("/<username>")
 def send_message(username):
     messages = TextSendMessage(text=username)
-    line_bot_api.broadcast(messages=messages)
-    # line_bot_api.push_message(MY_LINE_ID, TextSendMessage(text='Hello World!'))
+    # line_bot_api.broadcast(messages=messages)
+    line_bot_api.push_message(MY_LINE_ID, TextSendMessage(text=username))
 
 
 @handler.add(MessageEvent, message=TextMessage)
