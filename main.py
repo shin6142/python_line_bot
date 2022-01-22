@@ -46,15 +46,18 @@ load_dotenv(dotenv_path)
 #     return 'OK'
 
 
-@app.route("/<username>")
-def send_message(username):
-    # if username != 'favicon.ico':
-    #     messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
-        # line_bot_api.broadcast(messages=messages)
-        # line_bot_api.push_message(MY_LINE_ID, messages)
-    # img_path = 'images/woman_yoga.svg'
+@app.route("/")
+def show_index():
     return render_template('index.html')
 
+# @app.route("/<username>")
+# def send_message(username):
+#     if username != 'favicon.ico':
+#         messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
+#         line_bot_api.broadcast(messages=messages)
+#         line_bot_api.push_message(MY_LINE_ID, messages)
+#     img_path = 'images/woman_yoga.svg'
+#     return render_template('index.html')
 
 # @handler.add(MessageEvent, message=TextMessage)
 # def handle_text_message(event):
