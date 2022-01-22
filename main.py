@@ -52,7 +52,7 @@ def send_message(username):
         messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
         # line_bot_api.broadcast(messages=messages)
         line_bot_api.push_message(MY_LINE_ID, messages)
-    img_path = 'images/woman_yoga.svg'
+    img_path = 'templates/images/woman_yoga.svg'
     return render_template('index.html', title='HOME', image_path=img_path)
 
 
