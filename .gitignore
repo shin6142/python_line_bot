@@ -1,4 +1,3 @@
 credentials.json
-test.py
-test02.py
 __pycache__
+.env
