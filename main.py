@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 import os
 
 
-app = Flask(__name__)
+app = Flask(__name__) 
 
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
@@ -26,6 +26,7 @@ MY_LINE_ID = os.environ.get("MY_LINE_ID")
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
+
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -51,7 +52,8 @@ def send_message(username):
         messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
         # line_bot_api.broadcast(messages=messages)
         line_bot_api.push_message(MY_LINE_ID, messages)
-    return render_template("index.html")
+    img_path = 'images/woman_yoga.svg'
+    return render_template('index.html', title='HOME', image_path=img_path)
 
 
 @handler.add(MessageEvent, message=TextMessage)
