@@ -14,36 +14,36 @@ from dotenv import load_dotenv
 import os
 
 
-app = Flask(__name__) 
+app = Flask(__name__, static_folder='static') 
 
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
 #環境変数取得
-YOUR_CHANNEL_ACCESS_TOKEN = os.environ.get("YOUR_CHANNEL_ACCESS_TOKEN")
-YOUR_CHANNEL_SECRET = os.environ.get("YOUR_CHANNEL_SECRET")
-MY_LINE_ID = os.environ.get("MY_LINE_ID")
+# YOUR_CHANNEL_ACCESS_TOKEN = os.environ.get("YOUR_CHANNEL_ACCESS_TOKEN")
+# YOUR_CHANNEL_SECRET = os.environ.get("YOUR_CHANNEL_SECRET")
+# MY_LINE_ID = os.environ.get("MY_LINE_ID")
 
-line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
-handler = WebhookHandler(YOUR_CHANNEL_SECRET)
+# line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
+# handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 
-@app.route("/callback", methods=['POST'])
-def callback():
-    # get X-Line-Signature header value
-    signature = request.headers['X-Line-Signature']
+# @app.route("/callback", methods=['POST'])
+# def callback():
+#     # get X-Line-Signature header value
+#     signature = request.headers['X-Line-Signature']
 
-    # get request body as text
-    body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
+#     # get request body as text
+#     body = request.get_data(as_text=True)
+#     app.logger.info("Request body: " + body)
 
-    # handle webhook body
-    try:
-        handler.handle(body, signature)
-    except InvalidSignatureError:
-        abort(400)
+#     # handle webhook body
+#     try:
+#         handler.handle(body, signature)
+#     except InvalidSignatureError:
+#         abort(400)
 
-    return 'OK'
+#     return 'OK'
 
 
 @app.route("/<username>")
@@ -51,27 +51,27 @@ def send_message(username):
     if username != 'favicon.ico':
         messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
         # line_bot_api.broadcast(messages=messages)
-        line_bot_api.push_message(MY_LINE_ID, messages)
-    img_path = 'templates/images/woman_yoga.svg'
+        # line_bot_api.push_message(MY_LINE_ID, messages)
+    img_path = 'images/woman_yoga.svg'
     return render_template('index.html', title='HOME', image_path=img_path)
 
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_text_message(event):
-    if event.message.text == 'ありがとう':
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage('どういたしまして'))
-    else:
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=event.message.text))
+# @handler.add(MessageEvent, message=TextMessage)
+# def handle_text_message(event):
+#     if event.message.text == 'ありがとう':
+#         line_bot_api.reply_message(
+#             event.reply_token,
+#             TextSendMessage('どういたしまして'))
+#     else:
+#         line_bot_api.reply_message(
+#             event.reply_token,
+#             TextSendMessage(text=event.message.text))
 
-@handler.add(MessageEvent, message=ImageMessage)
-def handle_image_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage('いい写真ですね'))
+# @handler.add(MessageEvent, message=ImageMessage)
+# def handle_image_message(event):
+#     line_bot_api.reply_message(
+#         event.reply_token,
+#         TextSendMessage('いい写真ですね'))
 
 
 
