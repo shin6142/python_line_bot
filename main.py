@@ -1,5 +1,4 @@
 from flask import Flask, request, abort, render_template
-from importlib_metadata import re
 from linebot import (
     LineBotApi, WebhookHandler
 )
