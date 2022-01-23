@@ -47,8 +47,5 @@ def get_user(username):
 
 # db.drop_all()
 # db.create_all()
-
-result = get_user('user1')
-print(result.username)
 # for user in users:
 #     print(user.username, user.id)
