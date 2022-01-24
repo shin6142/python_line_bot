@@ -3,9 +3,10 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql.functions import current_timestamp
+import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///calender.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///calender.db'
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -47,5 +48,6 @@ def get_user(username):
 
 # db.drop_all()
 # db.create_all()
+
 # for user in users:
 #     print(user.username, user.id)
