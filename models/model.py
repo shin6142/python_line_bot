@@ -6,7 +6,7 @@ from sqlalchemy.sql.functions import current_timestamp
 import os
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///calender.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL_FIXED') or 'sqlite:///calender.db'
 db = SQLAlchemy(app)
 
 class User(db.Model):
