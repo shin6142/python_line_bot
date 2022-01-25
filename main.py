@@ -61,6 +61,9 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
+    profile = line_bot_api.get_profile(event.source.user_id)
+    username = profile.display_name
+    model.add_user(username)
 # @app.route("/", methods=['GET'])
 # def show_index():
 #     return render_template('index.html')
