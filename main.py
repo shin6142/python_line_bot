@@ -27,7 +27,6 @@ MY_LINE_ID = os.environ.get("MY_LINE_ID")
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
-print(handler)
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -52,14 +51,16 @@ def handle_follow(event):
         event.reply_token,
         TextSendMessage(text='初めまして')
     )
+    profile = line_bot_api.get_profile(event.source.user_id)
+    username = profile.display_name
+    model.add_user(username)
+
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
-
-
 # @app.route("/", methods=['GET'])
 # def show_index():
 #     return render_template('index.html')
