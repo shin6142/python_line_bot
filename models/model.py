@@ -38,16 +38,24 @@ def add_stamp(user_id: int):
     db.session.add(new_stamp)
     db.session.commit()
 
-def get_user(username):
-    user = db.session.query(User).filter(User.username==username).first()
+def get_user(user_id):
+    user = db.session.query(User).filter(User.id==user_id).first()
     return user
 
-# if __name__ == "__main__":
-#     app.run()
+def get_check_in_date_list(user_id):
+    stamps = db.session.query(Stamp).\
+        filter(Stamp.user_id == user_id).all()
+    check_in_date_list = []
+    import datetime
+    for stamp in stamps:
+        check_in_date_list.append(stamp.created_at)
+    return check_in_date_list
 
-
-# db.drop_all()
-# db.create_all()
-
-# for user in users:
-#     print(user.username, user.id)
+def get_monthly_date_list(check_in_date_list):
+    import datetime
+    dt_now = datetime.datetime.now()
+    monthly_date_list = []
+    for date in check_in_date_list:
+        if date.year==dt_now.year and date.month==dt_now.month:
+            monthly_date_list.append(date.day)
+    return monthly_date_list

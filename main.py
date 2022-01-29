@@ -58,12 +58,13 @@ def handle_follow(event):
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    if event.message.text=="登録":
+        profile = line_bot_api.get_profile(event.source.user_id)
+        username = profile.display_name
+        model.add_user(username)
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
-    profile = line_bot_api.get_profile(event.source.user_id)
-    username = profile.display_name
-    model.add_user(username)
 # @app.route("/", methods=['GET'])
 # def show_index():
 #     return render_template('index.html')
@@ -88,14 +89,17 @@ def register_post():
 	username = request.form['username']
 	model.add_user(username)
 
-@app.route('/user_detail/<username>')
-def show_user_detail(username):
-    user = model.get_user(username)
-    return render_template('user_detail.html', id=user.id, name=user.username )
-
 @app.route('/<int:user_id>')
 def check_in(user_id):
     model.add_stamp(user_id)
+
+@app.route('/user_detail/<int:user_id>')
+def show_user_detail(user_id):
+    user = model.get_user(user_id)
+    date_list = model.get_check_in_date_list(user_id)
+    date_list = model.get_monthly_date_list(date_list)
+    return render_template('user_detail.html', id=user.id, name=user.username, date_list=date_list)
+
 
 if __name__ == "__main__":
 #    app.run()

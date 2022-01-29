@@ -1,28 +1,9 @@
-h1 {
-    font-size: 18px;
-}
-
-table {
-    border-spacing: 0;
-    border-collapse: collapse;
-}
-
-td {
-    border: 1px solid #ddd;
-    padding: 20px;
-    text-align: center;
-}
-
-td:first-child {
-    color: red;
-}
-
-td:last-child {
-    color: royalblue;
-}
-
 #today {
     background-color: aqua;
+}
+
+.checkIn {
+    background-color: red;
 }
 
 .popup {
@@ -83,4 +64,40 @@ td:last-child {
     background-color: rgba(0, 0, 0, .8);
     z-index: 1;
     cursor: pointer;
+}
+
+#calendar {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+section {
+    margin: 10px;
+}
+
+h1 {
+    font-size: 18px;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: center;
+}
+
+td:first-child {
+    color: red;
+}
+
+td:last-child {
+    color: royalblue;
+}
+
+td.is-disabled {
+    color: #ccc;
 }
