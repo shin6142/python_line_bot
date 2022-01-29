@@ -65,9 +65,35 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
-# @app.route("/", methods=['GET'])
-# def show_index():
-#     return render_template('index.html')
+
+
+@app.route('/', methods=['GET'])
+def register_get():
+    return render_template('register.html', \
+        title = 'Form Sample(get)', \
+        message = '名前を入力して下さい。')
+
+
+@app.route('/', methods=['POST'])
+def register_post():
+    username = request.form['username']
+    model.add_user(username)
+    user = model.get_user_by_name(username)
+    return show_user_detail(user.id)
+
+
+@app.route('/<int:user_id>')
+def check_in(user_id):
+    model.add_stamp(user_id)
+
+
+@app.route('/user_detail/<int:user_id>')
+def show_user_detail(user_id):
+    user = model.get_user(user_id)
+    date_list = model.get_check_in_date_list(user_id)
+    date_list = model.get_monthly_date_list(date_list)
+    return render_template('user_detail.html', id=user.id, name=user.username, date_list=date_list)
+
 
 @app.route("/<username>")
 def send_message(username):
@@ -78,30 +104,6 @@ def send_message(username):
     return render_template('index.html')
 
 
-@app.route('/', methods=['GET'])
-def register_get():
-	return render_template('register.html', \
-		title = 'Form Sample(get)', \
-		message = '名前を入力して下さい。')
-
-@app.route('/', methods=['POST'])
-def register_post():
-	username = request.form['username']
-	model.add_user(username)
-
-@app.route('/<int:user_id>')
-def check_in(user_id):
-    model.add_stamp(user_id)
-
-@app.route('/user_detail/<int:user_id>')
-def show_user_detail(user_id):
-    user = model.get_user(user_id)
-    date_list = model.get_check_in_date_list(user_id)
-    date_list = model.get_monthly_date_list(date_list)
-    return render_template('user_detail.html', id=user.id, name=user.username, date_list=date_list)
-
-
 if __name__ == "__main__":
-#    app.run()
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port)

@@ -91,7 +91,6 @@ function moveCalendar(e) {
 function colorCheckInDates(list_data) {
     for (let i of list_data) {
         var cell = document.getElementById(i.toString());
-        document.write(i.toString());
         cell.classList.add('checkIn');
     }
 }

@@ -42,6 +42,10 @@ def get_user(user_id):
     user = db.session.query(User).filter(User.id==user_id).first()
     return user
 
+def get_user_by_name(username):
+    user = db.session.query(User).filter(User.username==username).first()
+    return user
+
 def get_check_in_date_list(user_id):
     stamps = db.session.query(Stamp).\
         filter(Stamp.user_id == user_id).all()
