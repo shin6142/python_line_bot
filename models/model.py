@@ -50,7 +50,6 @@ def get_check_in_date_list(user_id):
     stamps = db.session.query(Stamp).\
         filter(Stamp.user_id == user_id).all()
     check_in_date_list = []
-    import datetime
     for stamp in stamps:
         check_in_date_list.append(stamp.created_at)
     return check_in_date_list

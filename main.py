@@ -82,26 +82,28 @@ def register_post():
     return show_user_detail(user.id)
 
 
-@app.route('/<int:user_id>')
+@app.route('/check_in/<int:user_id>')
 def check_in(user_id):
     model.add_stamp(user_id)
-
-
-@app.route('/user_detail/<int:user_id>')
-def show_user_detail(user_id):
     user = model.get_user(user_id)
     date_list = model.get_check_in_date_list(user_id)
     date_list = model.get_monthly_date_list(date_list)
     return render_template('user_detail.html', id=user.id, name=user.username, date_list=date_list)
 
+@app.route('/user_detail/<int:user_id>')
+def show_user_detail(user_id):
+    user = model.get_user(user_id)
+    date_list = model.get_check_in_date_list(user_id)
+    # date_list = model.get_monthly_date_list(date_list)
+    return render_template('user_detail.html', id=user.id, name=user.username, date_list=date_list)
 
-@app.route("/<username>")
+
+@app.route("/send_message/<username>")
 def send_message(username):
     if username != 'favicon.ico':
         messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
         # line_bot_api.broadcast(messages=messages)
         line_bot_api.push_message(MY_LINE_ID, messages)
-    return render_template('index.html')
 
 
 if __name__ == "__main__":
