@@ -12,12 +12,12 @@ li {
     list-style: none;
 }
 
-#today {
+.today {
     background-color: aqua;
 }
 
 .checkIn {
-    background-color: red;
+    background-color: greenyellow;
 }
 
 .popup {

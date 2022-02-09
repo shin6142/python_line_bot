@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>{{ name }}</h1>
+    <h1>{{ date_list_year }}</h1>
+    <div id="calendar"></div>
+    <script>
+        var date_list_year = {{date_list_year|tojson}};
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/user_detail_year.js') }}"></script>
+{% endblock content %}

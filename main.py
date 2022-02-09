@@ -94,9 +94,15 @@ def check_in(user_id):
 def show_user_detail(user_id):
     user = model.get_user(user_id)
     date_list = model.get_check_in_date_list(user_id)
-    # date_list = model.get_monthly_date_list(date_list)
+    date_list = model.get_monthly_date_list(date_list)
     return render_template('user_detail.html', id=user.id, name=user.username, date_list=date_list)
 
+
+@app.route('/user_detail_year/<int:user_id>')
+def show_user_detail_year(user_id):
+    user = model.get_user(user_id)
+    date_list_year = model.get_check_in_date_list(user_id)
+    return render_template('user_detail_year.html', id=user.id, name=user.username, date_list_year=date_list_year)
 
 @app.route("/send_message/<username>")
 def send_message(username):

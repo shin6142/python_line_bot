@@ -8,11 +8,11 @@
     <div class="black-background" id="js-black-bg"></div>
 </div>
     <h1>{{ name }}</h1>
-    <h1>{{ date_list }}</h1>
     <button id="prev" type="button">前の月</button>
     <button id="next" type="button">次の月</button>
     <div id="calendar"></div>
     <script>
         var date_list = {{date_list|tojson}};
     </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/user_detail.js') }}"></script>
 {% endblock content %}
