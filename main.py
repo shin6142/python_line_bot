@@ -21,50 +21,50 @@ load_dotenv(dotenv_path)
 
 
 #環境変数取得
-YOUR_CHANNEL_ACCESS_TOKEN = os.environ.get("YOUR_CHANNEL_ACCESS_TOKEN")
-YOUR_CHANNEL_SECRET = os.environ.get("YOUR_CHANNEL_SECRET")
-MY_LINE_ID = os.environ.get("MY_LINE_ID")
+# YOUR_CHANNEL_ACCESS_TOKEN = os.environ.get("YOUR_CHANNEL_ACCESS_TOKEN")
+# YOUR_CHANNEL_SECRET = os.environ.get("YOUR_CHANNEL_SECRET")
+# MY_LINE_ID = os.environ.get("MY_LINE_ID")
 
-line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
-handler = WebhookHandler(YOUR_CHANNEL_SECRET)
+# line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
+# handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
-@app.route("/callback", methods=['POST'])
-def callback():
-    # get X-Line-Signature header value
-    signature = request.headers['X-Line-Signature']
+# @app.route("/callback", methods=['POST'])
+# def callback():
+#     # get X-Line-Signature header value
+#     signature = request.headers['X-Line-Signature']
 
-    # get request body as text
-    body = request.get_data(as_text=True)
-    app.logger.info("Request body: " + body)
+#     # get request body as text
+#     body = request.get_data(as_text=True)
+#     app.logger.info("Request body: " + body)
 
-    # handle webhook body
-    try:
-        handler.handle(body, signature)
-    except InvalidSignatureError:
-        abort(400)
+#     # handle webhook body
+#     try:
+#         handler.handle(body, signature)
+#     except InvalidSignatureError:
+#         abort(400)
 
-    return 'OK'
+#     return 'OK'
 
-@handler.add(FollowEvent)
-def handle_follow(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text='初めまして')
-    )
-    profile = line_bot_api.get_profile(event.source.user_id)
-    username = profile.display_name
-    model.add_user(username)
+# @handler.add(FollowEvent)
+# def handle_follow(event):
+#     line_bot_api.reply_message(
+#         event.reply_token,
+#         TextSendMessage(text='初めまして')
+#     )
+#     profile = line_bot_api.get_profile(event.source.user_id)
+#     username = profile.display_name
+#     model.add_user(username)
 
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    if event.message.text=="登録":
-        profile = line_bot_api.get_profile(event.source.user_id)
-        username = profile.display_name
-        model.add_user(username)
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
+# @handler.add(MessageEvent, message=TextMessage)
+# def handle_message(event):
+#     if event.message.text=="登録":
+#         profile = line_bot_api.get_profile(event.source.user_id)
+#         username = profile.display_name
+#         model.add_user(username)
+#     line_bot_api.reply_message(
+#         event.reply_token,
+#         TextSendMessage(text=event.message.text))
 
 
 @app.route('/', methods=['GET'])
@@ -104,12 +104,12 @@ def show_user_detail_year(user_id):
     date_list_year = model.get_check_in_date_list(user_id)
     return render_template('user_detail_year.html', id=user.id, name=user.username, date_list_year=date_list_year)
 
-@app.route("/send_message/<username>")
-def send_message(username):
-    if username != 'favicon.ico':
-        messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
-        # line_bot_api.broadcast(messages=messages)
-        line_bot_api.push_message(MY_LINE_ID, messages)
+# @app.route("/send_message/<username>")
+# def send_message(username):
+#     if username != 'favicon.ico':
+#         messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
+#         # line_bot_api.broadcast(messages=messages)
+#         line_bot_api.push_message(MY_LINE_ID, messages)
 
 
 if __name__ == "__main__":

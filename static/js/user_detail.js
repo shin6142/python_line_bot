@@ -115,7 +115,7 @@ window.onload = function() {
 }
 
 
-document.querySelector('#prev').addEventListener('click', moveCalendar)
-document.querySelector('#next').addEventListener('click', moveCalendar)
+// document.querySelector('#prev').addEventListener('click', moveCalendar)
+// document.querySelector('#next').addEventListener('click', moveCalendar)
 showCalendar(year, month)
 colorCheckInDates(date_list)
