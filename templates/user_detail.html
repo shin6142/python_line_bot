@@ -8,6 +8,7 @@
     <div class="black-background" id="js-black-bg"></div>
 </div>
     <a href={{ url_for('show_user_detail_year', user_id=id)}}>年間</a>
+    <a href={{ url_for('create_qr', user_id=id)}}>QR作成</a>
     <h1>{{ name }}</h1>
     <div id="calendar"></div>
     <script>
