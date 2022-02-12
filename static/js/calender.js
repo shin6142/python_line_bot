@@ -32,7 +32,7 @@ class Calender {
         let dayCount = 1 // 日にちのカウント
         let calendarHtml = '' // HTMLを組み立てる変数
 
-        calendarHtml += '<h1>' + year + '/' + month + '</h1>'
+        calendarHtml += '<h3>' + year + '/' + month + '</h3>'
         calendarHtml += '<table>'
 
         // 曜日の行を作成

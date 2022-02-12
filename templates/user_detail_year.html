@@ -1,12 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-    <a href={{ url_for('show_user_detail', user_id=id)}}>TOP</a>
-    <h1>{{ name }}</h1>
-    <h1>{{ date_list_year }}</h1>
+    <h2>Annual Record</h2>
     <div id="calendar"></div>
     <script>
         var date_list_year = {{date_list_year|tojson}};
         var yearCalender = true;
     </script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/calender.js') }}"></script>
 {% endblock content %}
