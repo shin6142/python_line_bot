@@ -61,4 +61,5 @@ def get_monthly_date_list(check_in_date_list):
     for date in check_in_date_list:
         if date.year==dt_now.year and date.month==dt_now.month:
             monthly_date_list.append(date.day)
-    return monthly_date_list
+    unique_date_list = list(dict.fromkeys(monthly_date_list))
+    return unique_date_list
