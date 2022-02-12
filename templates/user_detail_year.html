@@ -6,6 +6,7 @@
     <div id="calendar"></div>
     <script>
         var date_list_year = {{date_list_year|tojson}};
+        var yearCalender = true;
     </script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/user_detail_year.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/calender.js') }}"></script>
 {% endblock content %}

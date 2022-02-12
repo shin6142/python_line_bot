@@ -12,6 +12,7 @@
     <div id="calendar"></div>
     <script>
         var date_list = {{date_list|tojson}};
+        var yearCalender = false;
     </script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/user_detail.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/calender.js') }}"></script>
 {% endblock content %}

@@ -1,13 +1,13 @@
 from flask import Flask, request, abort, render_template
-from linebot import (
-    LineBotApi, WebhookHandler
-)
-from linebot.exceptions import (
-    InvalidSignatureError
-)
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, FollowEvent, TemplateSendMessage, ButtonsTemplate, MessageAction
-)
+# from linebot import (
+#     LineBotApi, WebhookHandler
+# )
+# from linebot.exceptions import (
+#     InvalidSignatureError
+# )
+# from linebot.models import (
+#     MessageEvent, TextMessage, TextSendMessage, FollowEvent, TemplateSendMessage, ButtonsTemplate, MessageAction
+# )
 from os.path import join, dirname
 from dotenv import load_dotenv
 import os
