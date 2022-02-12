@@ -12,7 +12,7 @@ from os.path import join, dirname
 from dotenv import load_dotenv
 import os
 from models import model
-import qr_creater
+
 
 app = Flask(__name__, static_folder='static') 
 
@@ -111,9 +111,6 @@ def show_user_detail_year(user_id):
 #         # line_bot_api.broadcast(messages=messages)
 #         line_bot_api.push_message(MY_LINE_ID, messages)
 
-@app.route('/user_detail_year/<int:user_id>')
-def create_qr(user_id):
-    qr_creater.create_qr(user_id)
 
 
 
