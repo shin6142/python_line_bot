@@ -17,20 +17,6 @@
   width: 24%;
 }
 
-body {
-  height: 100%;
-  width: 375px;
-  margin: 0 auto;
-}
-
-.today {
-  background-color: aqua;
-}
-
-.checkIn {
-  background-color: greenyellow;
-}
-
 .popup {
   position: fixed;
   left: 0;
@@ -49,7 +35,7 @@ body {
   visibility: visible;
 }
 
-.popup-inner {
+.popup .popup-inner {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -62,11 +48,15 @@ body {
   z-index: 2;
 }
 
-.popup-inner img {
+.popup .popup-inner_text {
+  text-align: center;
+}
+
+.popup .popup-inner img {
   width: 100%;
 }
 
-.close-btn {
+.popup .close-btn {
   position: absolute;
   right: 0;
   top: 0;
@@ -77,12 +67,12 @@ body {
   cursor: pointer;
 }
 
-.close-btn i {
+.popup .close-btn i {
   font-size: 20px;
   color: #333;
 }
 
-.black-background {
+.popup .black-background {
   position: absolute;
   left: 0;
   top: 0;
@@ -91,6 +81,20 @@ body {
   background-color: rgba(0, 0, 0, 0.8);
   z-index: 1;
   cursor: pointer;
+}
+
+body {
+  height: 100%;
+  width: 375px;
+  margin: 0 auto;
+}
+
+.today {
+  background-color: aqua;
+}
+
+.checkIn {
+  background-color: greenyellow;
 }
 
 #calendar {

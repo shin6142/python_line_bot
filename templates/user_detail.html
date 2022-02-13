@@ -2,8 +2,11 @@
 {% block content %}
 <div class="popup" id="js-popup">
     <div class="popup-inner">
-        <div class="close-btn" id="js-close-btn"><i class="fas fa-times"></i></div>
-            <a href="#"><img src={{ url_for('static',filename='images/woman_yoga.svg') }} alt="ポップアップ画像" height="140px" width="100%"></a>
+        <div class="close-btn" id="js-close-btn">
+            <i class="fas fa-times"></i>
+        </div>
+            <p class="popup-inner_text">本日のトレーニングを記録しました</p>
+            <img class="popup-inner_img" src={{ url_for('static',filename='images/woman_yoga.svg') }} alt="ポップアップ画像" height="140px" width="100%">
         </div>
     <div class="black-background" id="js-black-bg"></div>
 </div>
@@ -13,5 +16,7 @@
     <script>
         var date_list = {{date_list|tojson}};
         var yearCalender = false;
+        var checkIn = {{is_first|tojson}};
     </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/checkInAnimation.js') }}"></script>
 {% endblock content %}
