@@ -54,7 +54,8 @@ def get_check_in_date_list(user_id):
         check_in_date_list.append(stamp.created_at)
     return check_in_date_list
 
-def get_monthly_date_list(check_in_date_list):
+def get_monthly_date_list(user_id):
+    check_in_date_list = get_check_in_date_list(user_id)
     import datetime
     dt_now = datetime.datetime.now()
     monthly_date_list = []
