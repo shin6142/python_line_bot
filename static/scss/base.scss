@@ -1,16 +1,9 @@
+@import "hamburgerMenu";
 @import "header";
 body {
     height: 100%;
     width: 375px;
     margin: 0 auto;
-}
-
-ul {
-    display: flex;
-}
-
-li {
-    list-style: none;
 }
 
 .today {

@@ -1,17 +1,26 @@
-body {
-  height: 100%;
-  width: 375px;
-  margin: 0 auto;
-}
-
-ul {
+.header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-li {
-  list-style: none;
+.header_left {
+  width: 24%;
+}
+
+.header_center {
+  width: auto;
+  text-align: center;
+}
+
+.header_right {
+  width: 24%;
+}
+
+body {
+  height: 100%;
+  width: 375px;
+  margin: 0 auto;
 }
 
 .today {

@@ -12,11 +12,22 @@
 <body>
 
 
-    <header>
-        <h1>FitHub:{{ name }}</h1>
-        <a href={{ url_for('show_user_detail', user_id=id)}}>Top Page</a>
-        <a href={{ url_for('show_user_detail_year', user_id=id)}}>Annual Record</a>
-        <a href={{ url_for('check_in', user_id=id)}}>今日のトレーニングを記録</a>
+    <header class="header">
+        <div class="header_left">
+            <ul>
+                <li>
+                    <a href={{ url_for('show_user_detail', user_id=id)}}>Top Page</a>
+                </li>
+                <li>
+                    <a href={{ url_for('show_user_detail_year', user_id=id)}}>Annual Record</a>
+                </li>
+            </ul>
+        </div>
+        <div class="header_center">
+            <h1 class="title">FitHub</h1>
+        </div>
+        <div class="header_right">
+        </div>
     </header>
 
     

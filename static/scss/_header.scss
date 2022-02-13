@@ -1,0 +1,14 @@
+.header {
+    display: flex;
+    &_left {
+        width: 24%;
+    }
+    &_center {
+        width: auto;
+        text-align: center;
+    }
+    &_right {
+        width: 24%;
+        @include hamburgerMenu;
+    }
+}
