@@ -5,8 +5,11 @@
         <div class="close-btn" id="js-close-btn">
             <i class="fas fa-times"></i>
         </div>
-            <p class="popup-inner_text">本日のトレーニングを記録しました</p>
+            <p class="popup-inner_text">本日のトレーニングを記録しました!</p>
             <img class="popup-inner_img" src={{ url_for('static',filename='images/woman_yoga.svg') }} alt="ポップアップ画像" height="140px" width="100%">
+            <p class="popup-inner_text">LINEで友達に報告しますか？</p>
+            <a href={{ url_for('send_message', user_id=id)}}>はい</a>
+            <a href={{ url_for('show_user_detail', user_id=id)}}>いいえ</a>
         </div>
     <div class="black-background" id="js-black-bg"></div>
 </div>
