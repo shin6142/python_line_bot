@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2>Annual Record</h2>
+    <a href={{ url_for('show_user_detail', user_id=id)}}>今月の記録</a>
+    <a href={{ url_for('show_all_user')}}>友達の記録</a>
     <div id="calendar"></div>
     <script>
         var date_list_year = {{date_list_year|tojson}};
         var yearCalender = true;
     </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/calender.js') }}"></script>
 {% endblock content %}

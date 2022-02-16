@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>友達の記録</h2>
+    {% for user in users %}
+        <a href={{ url_for('show_user_detail', user_id=user.id)}}>{{user.username}}</a>
+    {% endfor %}
+{% endblock content %}

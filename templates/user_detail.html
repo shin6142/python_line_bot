@@ -14,6 +14,8 @@
     <div class="black-background" id="js-black-bg"></div>
 </div>
     <h2>Top Page:{{ name }}</h2>
+    <a href={{ url_for('show_user_detail_year', user_id=id)}}>年間の記録</a>
+    <a href={{ url_for('show_all_user')}}>友達の記録</a>
     <a href={{ url_for('check_in', user_id=id)}}>今日のトレーニングを記録</a>
     <div id="calendar"></div>
     <script>
@@ -22,4 +24,5 @@
         var checkIn = {{is_first|tojson}};
     </script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/checkInAnimation.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/calender.js') }}"></script>
 {% endblock content %}

@@ -10,30 +10,10 @@
     <link href="https://use.fontawesome.com/releases/v5.0.8/css/all.css" rel="stylesheet">
 </head>
 <body>
-
-
     <header class="header">
-        <div class="header_left">
-            <ul>
-                <li>
-                    <a href={{ url_for('show_user_detail', user_id=id)}}>Top Page</a>
-                </li>
-                <li>
-                    <a href={{ url_for('show_user_detail_year', user_id=id)}}>Annual Record</a>
-                </li>
-            </ul>
-        </div>
-        <div class="header_center">
-            <h1 class="title">FitHub</h1>
-        </div>
-        <div class="header_right">
-        </div>
+        <h1 class="title">FitHub</h1>
     </header>
-
-    
-
     {% block content %}{% endblock %}
-    <script type="text/javascript" src="{{ url_for('static', filename='js/calender.js') }}"></script>
     <script src="https://unpkg.com/smartphoto@1.1.0/js/smartphoto.min.js"></script>
 </body>
 </html>

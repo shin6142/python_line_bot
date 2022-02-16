@@ -38,6 +38,10 @@ def add_stamp(user_id: int):
     db.session.add(new_stamp)
     db.session.commit()
 
+def get_all_user():
+    users = db.session.query(User).all()
+    return users
+
 def get_user(user_id):
     user = db.session.query(User).filter(User.id==user_id).first()
     return user
