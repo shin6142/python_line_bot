@@ -10,10 +10,10 @@
             <p class="popup-inner_text">LINEで友達に報告しますか？</p>
             <a href={{ url_for('send_message', user_id=id)}}>はい</a>
             <a href={{ url_for('show_user_detail', user_id=id)}}>いいえ</a>
-        </div>
+    </div>
     <div class="black-background" id="js-black-bg"></div>
 </div>
-    <h2>Top Page:{{ name }}</h2>
+    <h2>今月の記録:{{ name }}</h2>
     <a href={{ url_for('show_user_detail_year', user_id=id)}}>年間の記録</a>
     <a href={{ url_for('show_all_user')}}>友達の記録</a>
     <a href={{ url_for('check_in', user_id=id)}}>今日のトレーニングを記録</a>
