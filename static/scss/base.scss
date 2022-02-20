@@ -4,6 +4,7 @@ body {
     height: 100%;
     width: 375px;
     margin: 0 auto;
+    border: 1px black solid;
 }
 
 .today {
@@ -25,8 +26,7 @@ section {
 }
 
 table {
-    width: 90%;
-    margin: 0 auto;
+    width: 100%;
     border-spacing: 0;
     border-collapse: collapse;
 }
