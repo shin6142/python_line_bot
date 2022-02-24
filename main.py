@@ -50,7 +50,7 @@ def callback():
     return 'OK'
 
 
-def make_button_template():
+def make_button_template(user_id):
     message_template = TemplateSendMessage(
         alt_text="FitHubからのお知らせ",
         template=ButtonsTemplate(
@@ -61,13 +61,13 @@ def make_button_template():
             actions= [
                 {
                     "type": "uri",
-                    "label": "今月の記録",
-                    "uri": "https://python-line-bot-0113.herokuapp.com/user_detail/1"
+                    "label": "本日のトレーニングを記録する",
+                    "uri": f"https://python-line-bot-0113.herokuapp.com/user_detail/{user_id}"
                 },
                 {
                     "type": "uri",
-                    "label": "年間の記録",
-                    "uri": "https://python-line-bot-0113.herokuapp.com/user_detail_year/1"
+                    "label": "記録を確認する",
+                    "uri": f"https://python-line-bot-0113.herokuapp.com/check_in/{user_id}"
                 }
             ]
         )
@@ -78,7 +78,13 @@ def make_button_template():
 # ----LINE bot------
 @handler.add(FollowEvent)
 def handle_image_message(event):
-    messages = make_button_template()
+    profile = line_bot_api.get_profile(event.source.user_id)
+    username = profile.display_name
+    if model.get_user_by_name(username) == None:
+        model.add_user(username)
+    user = model.get_user_by_name(username)
+    user_id = user.id
+    messages = make_button_template(user_id)
     line_bot_api.reply_message(
         event.reply_token,
         messages
