@@ -1,16 +1,18 @@
-from flask import Flask, request, abort, render_template
-# from linebot import (
-#     LineBotApi, WebhookHandler
-# )
-# from linebot.exceptions import (
-#     InvalidSignatureError
-# )
-# from linebot.models import (
-#     MessageEvent, TextMessage, TextSendMessage, FollowEvent, TemplateSendMessage, ButtonsTemplate, MessageAction
-# )
+from flask import Flask, request, abort, render_template, make_response
+from linebot import (
+    LineBotApi, WebhookHandler
+)
+from linebot.exceptions import (
+    InvalidSignatureError
+)
+from linebot.models import (
+    MessageEvent, TextMessage, TextSendMessage, FollowEvent, TemplateSendMessage,
+    ButtonsTemplate, MessageAction, CarouselTemplate, CarouselColumn
+    )
 from os.path import join, dirname
 from dotenv import load_dotenv
 import os
+import pyqrcode
 
 from sqlalchemy import false, true
 from models import model
@@ -27,48 +29,59 @@ YOUR_CHANNEL_ACCESS_TOKEN = os.environ.get("YOUR_CHANNEL_ACCESS_TOKEN")
 YOUR_CHANNEL_SECRET = os.environ.get("YOUR_CHANNEL_SECRET")
 MY_LINE_ID = os.environ.get("MY_LINE_ID")
 
-# line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
-# handler = WebhookHandler(YOUR_CHANNEL_SECRET)
+line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
+handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
-# @app.route("/callback", methods=['POST'])
-# def callback():
-#     # get X-Line-Signature header value
-#     signature = request.headers['X-Line-Signature']
+@app.route("/callback", methods=['POST'])
+def callback():
+    # get X-Line-Signature header value
+    signature = request.headers['X-Line-Signature']
 
-#     # get request body as text
-#     body = request.get_data(as_text=True)
-#     app.logger.info("Request body: " + body)
+    # get request body as text
+    body = request.get_data(as_text=True)
+    app.logger.info("Request body: " + body)
 
-#     # handle webhook body
-#     try:
-#         handler.handle(body, signature)
-#     except InvalidSignatureError:
-#         abort(400)
+    # handle webhook body
+    try:
+        handler.handle(body, signature)
+    except InvalidSignatureError:
+        abort(400)
 
-#     return 'OK'
+    return 'OK'
 
-# @handler.add(FollowEvent)
-# def handle_follow(event):
-#     line_bot_api.reply_message(
-#         event.reply_token,
-#         TextSendMessage(text='初めまして')
-#     )
-#     profile = line_bot_api.get_profile(event.source.user_id)
-#     username = profile.display_name
-#     model.add_user(username)
+@handler.add(FollowEvent)
+def handle_follow(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text='初めまして')
+    )
+    profile = line_bot_api.get_profile(event.source.user_id)
+    username = profile.display_name
+    model.add_user(username)
 
+# ----TODO------
 
-# @handler.add(MessageEvent, message=TextMessage)
-# def handle_message(event):
-#     if event.message.text=="登録":
-#         profile = line_bot_api.get_profile(event.source.user_id)
-#         username = profile.display_name
-#         model.add_user(username)
-#     line_bot_api.reply_message(
-#         event.reply_token,
-#         TextSendMessage(text=event.message.text))
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    notes = [CarouselColumn(thumbnail_image_url='images/woman_yoga.svg',
+                            title="【ReleaseNote】トークルームを実装しました。",
+                            text="creation(創作中・考え中の何かしらのモノ・コト)に関して、意見を聞けるようにトークルーム機能を追加しました。",
+                            actions=[{"type": "message","label": "サイトURL","text": "https://renttle.jp/notes/kota/7"}]),
+    ]
+    messages = TemplateSendMessage(
+        alt_text='template',
+        template=CarouselTemplate(columns=notes),
+    )
 
+    # if event.message.text=="登録":
+    #     profile = line_bot_api.get_profile(event.source.user_id)
+    #     username = profile.display_name
+    #     model.add_user(username)
+    # TextSendMessage(text=event.message.text))
+    line_bot_api.reply_message(event.reply_token, messages=messages)
 
+    
+# ----TODO------
 @app.route('/', methods=['GET'])
 def register_get():
     return render_template('register.html', \
@@ -125,6 +138,18 @@ def show_all_user():
     users_list = model.get_all_user()
     return render_template('all_user_list.html', users=users_list)
 
+@app.route("/create_qr/<int:user_id>")
+def create_qrcode(user_id):
+    qr_filename = "qr.png"
+    qr_url = f'https://python-line-bot-0113.herokuapp.com/check_in/{user_id}'
+    code = pyqrcode.create(qr_url, error='L', version=4, mode='binary')
+    code.png(qr_filename, scale=5, module_color=[0, 0, 0, 128], background=[255, 255, 255])
+    response = make_response()
+    response.data  = open(qr_filename, "rb").read()
+    response.headers['Content-Type'] = 'application/octet-stream'
+    response.headers['Content-Disposition'] = 'attachment; filename=checkInQRCode.png'
+    os.remove(qr_filename)
+    return response
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
