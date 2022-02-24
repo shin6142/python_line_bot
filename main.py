@@ -49,35 +49,51 @@ def callback():
 
     return 'OK'
 
+
+def make_button_template():
+    message_template = TemplateSendMessage(
+        alt_text="FitHubからのお知らせ",
+        template=ButtonsTemplate(
+            text="トレーニングの記録",
+            title="FitHub",
+            image_size="cover",
+            thumbnail_image_url="https://python-line-bot-0113.herokuapp.com/static/images/woman_yoga.svg",
+            actions= [
+                {
+                    "type": "uri",
+                    "label": "今月の記録",
+                    "uri": "https://python-line-bot-0113.herokuapp.com/user_detail/1"
+                },
+                {
+                    "type": "uri",
+                    "label": "年間の記録",
+                    "uri": "https://python-line-bot-0113.herokuapp.com/user_detail_year/1"
+                }
+            ]
+        )
+    )
+    return message_template
+
+
+# ----LINE bot------
 @handler.add(FollowEvent)
-def handle_follow(event):
+def handle_image_message(event):
+    messages = make_button_template()
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text='初めまして')
+        messages
     )
-    profile = line_bot_api.get_profile(event.source.user_id)
-    username = profile.display_name
-    model.add_user(username)
 
 # ----TODO------
 
 # @handler.add(MessageEvent, message=TextMessage)
 # def handle_message(event):
-    # notes = [CarouselColumn(thumbnail_image_url='images/woman_yoga.svg',
-    #                         title="【ReleaseNote】トークルームを実装しました。",
-    #                         text="creation(創作中・考え中の何かしらのモノ・コト)に関して、意見を聞けるようにトークルーム機能を追加しました。",
-    #                         actions=[{"type": "message","label": "サイトURL","text": "https://renttle.jp/notes/kota/7"}]),
-    # ]
-    # messages = TemplateSendMessage(
-    #     alt_text='template',
-    #     template=CarouselTemplate(columns=notes),
-    # )
-
-    # if event.message.text=="登録":
-    #     profile = line_bot_api.get_profile(event.source.user_id)
-    #     username = profile.display_name
-    #     model.add_user(username)
-    # line_bot_api.reply_message(event.reply_token, messages=messages)
+#     if event.message.text=="登録":
+#         profile = line_bot_api.get_profile(event.source.user_id)
+#         username = profile.display_name
+#         model.add_user(username)
+#     messages = event.message.text
+#     line_bot_api.reply_message(event.reply_token, messages=messages)
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -85,23 +101,6 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text=event.message.text))
 
-def make_button_template():
-    message_template = TemplateSendMessage(
-        alt_text="にゃーん",
-        template=ButtonsTemplate(
-            text="どこに表示されるかな？",
-            title="タイトルですよ",
-            image_size="cover",
-            thumbnail_image_url="https://python-line-bot-0113.herokuapp.com/static/images/woman_yoga.svg",
-            actions=[
-                URIAction(
-                    uri="https://任意のページURL",
-                    label="URIアクションのLABEL"
-                )
-            ]
-        )
-    )
-    return message_template
 
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image_message(event):
@@ -110,9 +109,9 @@ def handle_image_message(event):
         event.reply_token,
         messages
     )
+# ----LINE bot------
 
-
-# ----TODO------
+# -----Web--------
 @app.route('/', methods=['GET'])
 def register_get():
     return render_template('register.html', \
