@@ -7,7 +7,7 @@ from linebot.exceptions import (
 )
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, FollowEvent, TemplateSendMessage,
-    ButtonsTemplate, MessageAction, CarouselTemplate, CarouselColumn
+    ButtonsTemplate, MessageAction, CarouselTemplate, CarouselColumn, URIAction, ImageMessage
     )
 from os.path import join, dirname
 from dotenv import load_dotenv
@@ -84,6 +84,33 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
+
+def make_button_template():
+    message_template = TemplateSendMessage(
+        alt_text="にゃーん",
+        template=ButtonsTemplate(
+            text="どこに表示されるかな？",
+            title="タイトルですよ",
+            image_size="cover",
+            thumbnail_image_url="https://python-line-bot-0113.herokuapp.com/static/images/woman_yoga.svg",
+            actions=[
+                URIAction(
+                    uri="https://任意のページURL",
+                    label="URIアクションのLABEL"
+                )
+            ]
+        )
+    )
+    return message_template
+
+@handler.add(MessageEvent, message=ImageMessage)
+def handle_image_message(event):
+    messages = make_button_template()
+    line_bot_api.reply_message(
+        event.reply_token,
+        messages
+    )
+
 
 # ----TODO------
 @app.route('/', methods=['GET'])
