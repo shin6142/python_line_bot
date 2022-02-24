@@ -61,26 +61,30 @@ def handle_follow(event):
 
 # ----TODO------
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    notes = [CarouselColumn(thumbnail_image_url='images/woman_yoga.svg',
-                            title="【ReleaseNote】トークルームを実装しました。",
-                            text="creation(創作中・考え中の何かしらのモノ・コト)に関して、意見を聞けるようにトークルーム機能を追加しました。",
-                            actions=[{"type": "message","label": "サイトURL","text": "https://renttle.jp/notes/kota/7"}]),
-    ]
-    messages = TemplateSendMessage(
-        alt_text='template',
-        template=CarouselTemplate(columns=notes),
-    )
+# @handler.add(MessageEvent, message=TextMessage)
+# def handle_message(event):
+    # notes = [CarouselColumn(thumbnail_image_url='images/woman_yoga.svg',
+    #                         title="【ReleaseNote】トークルームを実装しました。",
+    #                         text="creation(創作中・考え中の何かしらのモノ・コト)に関して、意見を聞けるようにトークルーム機能を追加しました。",
+    #                         actions=[{"type": "message","label": "サイトURL","text": "https://renttle.jp/notes/kota/7"}]),
+    # ]
+    # messages = TemplateSendMessage(
+    #     alt_text='template',
+    #     template=CarouselTemplate(columns=notes),
+    # )
 
     # if event.message.text=="登録":
     #     profile = line_bot_api.get_profile(event.source.user_id)
     #     username = profile.display_name
     #     model.add_user(username)
-    # TextSendMessage(text=event.message.text))
-    line_bot_api.reply_message(event.reply_token, messages=messages)
+    # line_bot_api.reply_message(event.reply_token, messages=messages)
 
-    
+@handler.add(MessageEvent, message=TextMessage)
+def handle_message(event):
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text=event.message.text))
+
 # ----TODO------
 @app.route('/', methods=['GET'])
 def register_get():
