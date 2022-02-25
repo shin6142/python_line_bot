@@ -1,3 +1,10 @@
+@charset "UTF-8";
+.header_title {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-left: 20px;
+}
+
 .popup {
   position: fixed;
   left: 0;
@@ -64,11 +71,29 @@
   cursor: pointer;
 }
 
+@media screen and (min-width: 960px) {
+  /* 960px以上に適用されるCSS（PC用） */
+}
+
+#service .serviceTop {
+  background-image: url("../images/horizontal_dumbelle.jpg");
+  height: 600px;
+  background-size: cover;
+  background-position: right;
+}
+
 body {
   height: 100%;
-  width: 375px;
   margin: 0 auto;
   border: 1px black solid;
+}
+
+ul {
+  padding: 0;
+}
+
+ul li {
+  list-style: none;
 }
 
 .today {
@@ -114,5 +139,9 @@ td:last-child {
 
 td.is-disabled {
   color: #ccc;
+}
+
+@media screen and (min-width: 960px) {
+  /* 960px以上に適用されるCSS（PC用） */
 }
 /*# sourceMappingURL=base.css.map */

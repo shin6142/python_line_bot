@@ -1,0 +1,17 @@
+@media screen and (min-width: 481px) {}
+
+@media screen and (min-width: 960px) {
+    /* 960px以上に適用されるCSS（PC用） */
+}
+
+#service {
+    .serviceTop {
+        background-image: url("../images/horizontal_dumbelle.jpg");
+        height: 600px;
+        background-size: cover;
+        background-position: right;
+        &_title {
+            @include remove_h1_margin;
+        }
+    }
+}

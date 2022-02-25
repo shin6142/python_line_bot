@@ -61,14 +61,19 @@ def make_button_template(user_id):
             actions= [
                 {
                     "type": "uri",
-                    "label": "本日のトレーニングを記録する",
-                    "uri": f"https://python-line-bot-0113.herokuapp.com/user_detail/{user_id}"
+                    "label": "FitHubの使い方をみる",
+                    "uri": f"https://python-line-bot-0113.herokuapp.com/service"
                 },
                 {
                     "type": "uri",
                     "label": "記録を確認する",
+                    "uri": f"https://python-line-bot-0113.herokuapp.com/user_detail/{user_id}"
+                },
+                {
+                    "type": "uri",
+                    "label": "本日のトレーニングを記録する",
                     "uri": f"https://python-line-bot-0113.herokuapp.com/check_in/{user_id}"
-                }
+                },
             ]
         )
     )
@@ -163,9 +168,9 @@ def show_user_detail_year(user_id):
 def send_message(user_id):
     user = model.get_user(user_id)
     username = user.username
-#     if username != 'favicon.ico':
-#         messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
-#         # line_bot_api.broadcast(messages=messages)
+    if username != 'favicon.ico':
+        messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
+        line_bot_api.broadcast(messages=messages)
 #         line_bot_api.push_message(MY_LINE_ID, messages)
     return show_user_detail(user_id)
 
@@ -186,6 +191,12 @@ def create_qrcode(user_id):
     response.headers['Content-Disposition'] = 'attachment; filename=checkInQRCode.png'
     os.remove(qr_filename)
     return response
+
+
+@app.route('/service')
+def show_service_page():
+    return render_template('service.html')
+
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
