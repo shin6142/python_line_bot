@@ -12,7 +12,7 @@ from linebot.models import (
 from linebot.models.actions import PostbackAction
 import os
 
-from models import model, qr_creater
+from models import model
 
 
 
