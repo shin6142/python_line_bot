@@ -18,7 +18,7 @@ import pyqrcode
 
 from sqlalchemy import false, true
 from models import model, message_template, qr_creater
-
+from controller import line_controller
 
 app = Flask(__name__, static_folder='static') 
 
@@ -26,11 +26,11 @@ dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 
 #環境変数取得
-YOUR_CHANNEL_ACCESS_TOKEN = os.environ.get("YOUR_CHANNEL_ACCESS_TOKEN")
+# YOUR_CHANNEL_ACCESS_TOKEN = os.environ.get("YOUR_CHANNEL_ACCESS_TOKEN")
 YOUR_CHANNEL_SECRET = os.environ.get("YOUR_CHANNEL_SECRET")
-MY_LINE_ID = os.environ.get("MY_LINE_ID")
+# MY_LINE_ID = os.environ.get("MY_LINE_ID")
 
-line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
+# line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
 
 @app.route("/callback", methods=['POST'])
@@ -53,45 +53,20 @@ def callback():
 
 # ----LINE bot------
 @handler.add(FollowEvent)
-def handle_image_message(event):
-    profile = line_bot_api.get_profile(event.source.user_id)
-    username = profile.display_name
-    if model.get_user_by_name(username) == None:
-        model.add_user(username)
-    greeting_text = message_template.make_greeting_text(username)
-    user = model.get_user_by_name(username)
-    user_id = user.id
-    messages = message_template.make_button_template(user_id)
-    line_bot_api.reply_message(
-        event.reply_token,
-        [TextSendMessage(text=greeting_text), messages]
-    )
-# ----TODO------
+def greeting(event):
+    return line_controller.message_submittion.follow_event(event)
 
-# @handler.add(MessageEvent, message=TextMessage)
-# def handle_message(event):
-#     if event.message.text=="登録":
-#         profile = line_bot_api.get_profile(event.source.user_id)
-#         username = profile.display_name
-#         model.add_user(username)
-#     messages = event.message.text
-#     line_bot_api.reply_message(event.reply_token, messages=messages)
 
 @handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
+def reply_text(event):
+    return line_controller.message_submittion.handle_message(event)
 
 
-@handler.add(MessageEvent, message=ImageMessage)
-def handle_image_message(event):
-    messages = message_template.make_button_template()
-    line_bot_api.reply_message(
-        event.reply_token,
-        messages
-    )
+@app.route("/send_message/<int:user_id>")
+def send_message(user_id):
+    return line_controller.message_submittion.notify_checkin(user_id)
 # ----LINE bot------
+
 
 # -----Web--------
 @app.route('/', methods=['GET'])
@@ -135,15 +110,6 @@ def show_user_detail_year(user_id):
     date_list_year = model.get_check_in_date_list(user_id)
     return render_template('user_detail_year.html', id=user.id, name=user.username, date_list_year=date_list_year)
 
-@app.route("/send_message/<int:user_id>")
-def send_message(user_id):
-    user = model.get_user(user_id)
-    username = user.username
-    if username != 'favicon.ico':
-        messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
-        line_bot_api.broadcast(messages=messages)
-#         line_bot_api.push_message(MY_LINE_ID, messages)
-    return show_user_detail(user_id)
 
 @app.route('/all_user')
 def show_all_user():
