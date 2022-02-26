@@ -14,11 +14,10 @@ from linebot.models.actions import PostbackAction
 from os.path import join, dirname
 from dotenv import load_dotenv
 import os
-import pyqrcode
 
 from sqlalchemy import false, true
-from models import model, qr_creater
-from controller import line_controller
+from models import model
+from controller import line_controller, qrcode_controller
 
 app = Flask(__name__, static_folder='static') 
 
@@ -118,7 +117,7 @@ def show_all_user():
 
 @app.route("/create_qr/<int:user_id>")
 def qrcode(user_id):
-    return qr_creater.create_qrcode(user_id)
+    return qrcode_controller.create_qrcode(user_id)
 
 
 

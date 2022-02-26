@@ -17,14 +17,17 @@ from models import model, qr_creater
 
 
 #環境変数取得
-YOUR_CHANNEL_ACCESS_TOKEN = os.environ.get("YOUR_CHANNEL_ACCESS_TOKEN")
-YOUR_CHANNEL_SECRET = os.environ.get("YOUR_CHANNEL_SECRET")
-MY_LINE_ID = os.environ.get("MY_LINE_ID")
 
-line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 
 class LineConfig(object):
+    YOUR_CHANNEL_ACCESS_TOKEN = os.environ.get("YOUR_CHANNEL_ACCESS_TOKEN")
+    YOUR_CHANNEL_SECRET = os.environ.get("YOUR_CHANNEL_SECRET")
+    MY_LINE_ID = os.environ.get("MY_LINE_ID")
     line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
+
+    def __init__(self):
+        self.line_bot_api = message_submittion.line_bot_api
+        self.MY_LINE_ID = message_submittion.MY_LINE_ID
 
     def make_greeting_text(username):
         greeting_text = f"はじめまして、FitHubです!\n友達登録・会員登録していただきありがとうございます!\nFitHubは{username}の健康的な習慣づくりをサポートしていきます!"
@@ -62,8 +65,9 @@ class LineConfig(object):
 
 class message_submittion(LineConfig):
 
-    def follow_event(event):
-        profile = line_bot_api.get_profile(event.source.user_id)
+
+    def follow_event(event, self):
+        profile = self.line_bot_api.get_profile(event.source.user_id)
         username = profile.display_name
         if model.get_user_by_name(username) == None:
             model.add_user(username)
@@ -71,55 +75,56 @@ class message_submittion(LineConfig):
         user = model.get_user_by_name(username)
         user_id = user.id
         messages = message_submittion.make_button_template(user_id)
-        line_bot_api.reply_message(
-                event.reply_token,
+        self.line_bot_api.reply_message(
+            event.reply_token,
             [TextSendMessage(text=greeting_text), messages]
         )
     
-    def handle_message(event):
-        line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
+    def handle_message(event, self):
+        self.line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text)
+        )
 
     
-    def notify_checkin(user_id):
+    def notify_checkin(user_id, self):
         user = model.get_user(user_id)
         username = user.username
         if username != 'favicon.ico':
             messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
-            line_bot_api.broadcast(messages=messages)
-            # line_bot_api.push_message(MY_LINE_ID, messages)
+            self.line_bot_api.broadcast(messages=messages)
+            # self.line_bot_api.push_message(MY_LINE_ID, messages)
 
 
 
 
 # richMenu
-def make_rich_menu():
-    rich_menu_to_create = RichMenu(
-        size = RichMenuSize(width=2500, height=1686),
-        selected = True,
-        name = 'richmenu',
-        chat_bar_text = 'メニュー',
-        areas=[
-            RichMenuArea(
-                bounds=RichMenuBounds(x=0, y=0, width=1273, height=868),
-                action=PostbackAction(data='renew')
-            ),
-            RichMenuArea(
-                bounds=RichMenuBounds(x=1278, y=0, width=1211, height=864),
-                action=PostbackAction(data='deadline')
-            ),
-            RichMenuArea(
-                bounds=RichMenuBounds(x=0, y=864, width=1268, height=818),
-                action=PostbackAction(data="not_submitted")
-            ),
-            RichMenuArea(
-                bounds=RichMenuBounds(x=1273, y=877, width=1227, height=805),
-                action=PostbackAction(data="forget")
-            )
-        ]
-    )
-    richMenuId = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
-    with open("static/image/man_run.svg", 'rb') as f:
-        line_bot_api.set_rich_menu_image(richMenuId, "image/png", f)
-    return line_bot_api.set_default_rich_menu(richMenuId)
+# def make_rich_menu():
+#     rich_menu_to_create = RichMenu(
+#         size = RichMenuSize(width=2500, height=1686),
+#         selected = True,
+#         name = 'richmenu',
+#         chat_bar_text = 'メニュー',
+#         areas=[
+#             RichMenuArea(
+#                 bounds=RichMenuBounds(x=0, y=0, width=1273, height=868),
+#                 action=PostbackAction(data='renew')
+#             ),
+#             RichMenuArea(
+#                 bounds=RichMenuBounds(x=1278, y=0, width=1211, height=864),
+#                 action=PostbackAction(data='deadline')
+#             ),
+#             RichMenuArea(
+#                 bounds=RichMenuBounds(x=0, y=864, width=1268, height=818),
+#                 action=PostbackAction(data="not_submitted")
+#             ),
+#             RichMenuArea(
+#                 bounds=RichMenuBounds(x=1273, y=877, width=1227, height=805),
+#                 action=PostbackAction(data="forget")
+#             )
+#         ]
+#     )
+#     richMenuId = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
+#     with open("static/image/man_run.svg", 'rb') as f:
+#         line_bot_api.set_rich_menu_image(richMenuId, "image/png", f)
+#     return line_bot_api.set_default_rich_menu(richMenuId)
