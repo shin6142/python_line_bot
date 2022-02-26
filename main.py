@@ -59,16 +59,12 @@ def handle_image_message(event):
     if model.get_user_by_name(username) == None:
         model.add_user(username)
     greeting_text = message_template.make_greeting_text(username)
-    line_bot_api.reply_message(
-        event.reply_token,
-        messages=greeting_text
-    )
     user = model.get_user_by_name(username)
     user_id = user.id
     messages = message_template.make_button_template(user_id)
     line_bot_api.reply_message(
         event.reply_token,
-        messages
+        [TextSendMessage(text=greeting_text), messages]
     )
 # ----TODO------
 
