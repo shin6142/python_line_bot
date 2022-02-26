@@ -25,10 +25,6 @@ class LineConfig(object):
     MY_LINE_ID = os.environ.get("MY_LINE_ID")
     line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 
-    def __init__(self):
-        self.line_bot_api = message_submittion.line_bot_api
-        self.MY_LINE_ID = message_submittion.MY_LINE_ID
-
     def make_greeting_text(username):
         greeting_text = f"はじめまして、FitHubです!\n友達登録・会員登録していただきありがとうございます!\nFitHubは{username}の健康的な習慣づくりをサポートしていきます!"
         return greeting_text
@@ -66,8 +62,8 @@ class LineConfig(object):
 class message_submittion(LineConfig):
 
 
-    def follow_event(event, self):
-        profile = self.line_bot_api.get_profile(event.source.user_id)
+    def follow_event(event):
+        profile = message_submittion.line_bot_api.get_profile(event.source.user_id)
         username = profile.display_name
         if model.get_user_by_name(username) == None:
             model.add_user(username)
@@ -75,25 +71,25 @@ class message_submittion(LineConfig):
         user = model.get_user_by_name(username)
         user_id = user.id
         messages = message_submittion.make_button_template(user_id)
-        self.line_bot_api.reply_message(
+        message_submittion.line_bot_api.reply_message(
             event.reply_token,
             [TextSendMessage(text=greeting_text), messages]
         )
     
-    def handle_message(event, self):
-        self.line_bot_api.reply_message(
+    def handle_message(event):
+        message_submittion.line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=event.message.text)
         )
 
     
-    def notify_checkin(user_id, self):
+    def notify_checkin(user_id):
         user = model.get_user(user_id)
         username = user.username
         if username != 'favicon.ico':
             messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
-            self.line_bot_api.broadcast(messages=messages)
-            # self.line_bot_api.push_message(MY_LINE_ID, messages)
+            message_submittion.line_bot_api.broadcast(messages=messages)
+            # message_submittion.line_bot_api.push_message(MY_LINE_ID, messages)
 
 
 
