@@ -75,11 +75,6 @@ def callback():
 
     return 'OK'
 
-richMenuId = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
-with open("static/image/menu.png", 'rb') as f:
-    line_bot_api.set_rich_menu_image(richMenuId, "image/png", f)
-line_bot_api.set_default_rich_menu(richMenuId)
-
 
 # ----LINE bot------
 @handler.add(FollowEvent)
@@ -88,11 +83,11 @@ def handle_image_message(event):
     username = profile.display_name
     if model.get_user_by_name(username) == None:
         model.add_user(username)
-        greeting_text = message_template.make_greeting_text(username)
-        line_bot_api.reply_message(
-            event.reply_token,
-            messages=greeting_text
-        )
+    greeting_text = message_template.make_greeting_text(username)
+    line_bot_api.reply_message(
+        event.reply_token,
+        messages=greeting_text
+    )
     user = model.get_user_by_name(username)
     user_id = user.id
     messages = message_template.make_button_template(user_id)
@@ -100,7 +95,10 @@ def handle_image_message(event):
         event.reply_token,
         messages
     )
-
+    richMenuId = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
+    with open("static/image/man_run.svg", 'rb') as f:
+        line_bot_api.set_rich_menu_image(richMenuId, "image/png", f)
+    line_bot_api.set_default_rich_menu(richMenuId)
 # ----TODO------
 
 # @handler.add(MessageEvent, message=TextMessage)
