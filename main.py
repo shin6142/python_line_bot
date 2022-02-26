@@ -17,7 +17,7 @@ import os
 import pyqrcode
 
 from sqlalchemy import false, true
-from models import model, message_template, qr_creater
+from models import model, qr_creater
 from controller import line_controller
 
 app = Flask(__name__, static_folder='static') 
