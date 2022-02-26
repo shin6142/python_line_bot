@@ -17,7 +17,7 @@
     <a href={{ url_for('show_user_detail_year', user_id=id)}}>年間の記録</a>
     <a href={{ url_for('show_all_user')}}>友達の記録</a>
     <a href={{ url_for('check_in', user_id=id)}}>今日のトレーニングを記録</a>
-    <a href={{ url_for('create_qrcode', user_id=id)}}>チェックインQRコードを作成する</a>
+    <a href={{ url_for('qrcode', user_id=id)}}>チェックインQRコードを作成する</a>
     <div id="calendar"></div>
     <script>
         var date_list = {{date_list|tojson}};

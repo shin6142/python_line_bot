@@ -15,7 +15,7 @@ import os
 import pyqrcode
 
 from sqlalchemy import false, true
-from models import model
+from models import model, message_template, qr_creater
 
 
 app = Flask(__name__, static_folder='static') 
@@ -50,34 +50,34 @@ def callback():
     return 'OK'
 
 
-def make_button_template(user_id):
-    message_template = TemplateSendMessage(
-        alt_text="FitHubからのお知らせ",
-        template=ButtonsTemplate(
-            text="トレーニングの記録",
-            title="FitHub",
-            image_size="cover",
-            thumbnail_image_url="https://python-line-bot-0113.herokuapp.com/static/images/woman_yoga.svg",
-            actions= [
-                {
-                    "type": "uri",
-                    "label": "FitHubの使い方をみる",
-                    "uri": f"https://python-line-bot-0113.herokuapp.com/service"
-                },
-                {
-                    "type": "uri",
-                    "label": "記録を確認する",
-                    "uri": f"https://python-line-bot-0113.herokuapp.com/user_detail/{user_id}"
-                },
-                {
-                    "type": "uri",
-                    "label": "本日のトレーニングを記録する",
-                    "uri": f"https://python-line-bot-0113.herokuapp.com/check_in/{user_id}"
-                },
-            ]
-        )
-    )
-    return message_template
+# def make_button_template(user_id):
+#     message_template = TemplateSendMessage(
+#         alt_text="FitHubからのお知らせ",
+#         template=ButtonsTemplate(
+#             text="トレーニングの記録",
+#             title="FitHub",
+#             image_size="cover",
+#             thumbnail_image_url="https://python-line-bot-0113.herokuapp.com/static/images/woman_yoga.svg",
+#             actions= [
+#                 {
+#                     "type": "uri",
+#                     "label": "FitHubの使い方をみる",
+#                     "uri": f"https://python-line-bot-0113.herokuapp.com/service"
+#                 },
+#                 {
+#                     "type": "uri",
+#                     "label": "記録を確認する",
+#                     "uri": f"https://python-line-bot-0113.herokuapp.com/user_detail/{user_id}"
+#                 },
+#                 {
+#                     "type": "uri",
+#                     "label": "本日のトレーニングを記録する",
+#                     "uri": f"https://python-line-bot-0113.herokuapp.com/check_in/{user_id}"
+#                 },
+#             ]
+#         )
+#     )
+#     return message_template
 
 
 # ----LINE bot------
@@ -89,7 +89,7 @@ def handle_image_message(event):
         model.add_user(username)
     user = model.get_user_by_name(username)
     user_id = user.id
-    messages = make_button_template(user_id)
+    messages = message_template.make_button_template(user_id)
     line_bot_api.reply_message(
         event.reply_token,
         messages
@@ -115,7 +115,7 @@ def handle_message(event):
 
 @handler.add(MessageEvent, message=ImageMessage)
 def handle_image_message(event):
-    messages = make_button_template()
+    messages = message_template.make_button_template()
     line_bot_api.reply_message(
         event.reply_token,
         messages
@@ -180,17 +180,9 @@ def show_all_user():
     return render_template('all_user_list.html', users=users_list)
 
 @app.route("/create_qr/<int:user_id>")
-def create_qrcode(user_id):
-    qr_filename = "qr.png"
-    qr_url = f'https://python-line-bot-0113.herokuapp.com/check_in/{user_id}'
-    code = pyqrcode.create(qr_url, error='L', version=4, mode='binary')
-    code.png(qr_filename, scale=5, module_color=[0, 0, 0, 128], background=[255, 255, 255])
-    response = make_response()
-    response.data  = open(qr_filename, "rb").read()
-    response.headers['Content-Type'] = 'application/octet-stream'
-    response.headers['Content-Disposition'] = 'attachment; filename=checkInQRCode.png'
-    os.remove(qr_filename)
-    return response
+def qrcode(user_id):
+    return qr_creater.create_qrcode(user_id)
+
 
 
 @app.route('/service')
