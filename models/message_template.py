@@ -3,6 +3,11 @@ from linebot.models import (
     ButtonsTemplate, MessageAction, CarouselTemplate, CarouselColumn, URIAction, ImageMessage
     )
 
+def make_greeting_text(username):
+    greeting_text = f"はじめまして、FitHubです!\n友達登録・会員登録していただきありがとうございます!\nFitHubは{username}の健康的な習慣づくりをサポートしていきます!"
+    return greeting_text
+
+
 def make_button_template(user_id):
     message_template = TemplateSendMessage(
         alt_text="FitHubからのお知らせ",
