@@ -1,18 +1,30 @@
+@import "variables";
 @import "mixin";
 @import "header";
 @import "popup";
 @import "service";
 body {
-    height: 100%;
     margin: 0 auto;
-    border: 1px black solid;
+    .container {
+        max-width: 1340px;
+        margin: 0 auto;
+    }
+}
+
+a {
+    text-decoration: none;
 }
 
 ul {
     padding: 0;
+    margin: 0;
     li {
         list-style: none;
     }
+}
+
+.signup_button {
+    @include signup_button
 }
 
 .today {

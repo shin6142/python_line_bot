@@ -1,7 +1,19 @@
 .header {
+    background: rgba($color: $black, $alpha: 0.5);
+    color: $white;
+    width: 100%;
+    position: fixed;
     &_title {
-        margin-top: 0;
-        margin-bottom: 0;
-        margin-left: 20px;
+        @include remove_heading_margin;
+        margin-left: 40px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .header {
+        &_title {
+            @include remove_heading_margin;
+            margin-left: 20px;
+        }
     }
 }

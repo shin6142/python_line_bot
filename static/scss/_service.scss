@@ -1,17 +1,65 @@
-@media screen and (min-width: 481px) {}
-
-@media screen and (min-width: 960px) {
-    /* 960px以上に適用されるCSS（PC用） */
-}
+@media screen and (min-width: 960px) {}
 
 #service {
     .serviceTop {
         background-image: url("../images/horizontal_dumbelle.jpg");
-        height: 600px;
         background-size: cover;
-        background-position: right;
+        background-position: 70% 50%;
+        color: $white;
+        &_opacity {
+            padding-bottom: 10px;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0.1));
+        }
         &_title {
-            @include remove_h1_margin;
+            @include remove_heading_margin;
+            padding-top: 160px;
+            margin-left: 40px;
+        }
+        &_list {
+            margin-left: 40px;
+            padding-top: 20px;
+            &_item {
+                .fa-check {
+                    padding-right: 10px;
+                    color: $orange;
+                }
+            }
+        }
+        .signup_button {
+            margin-left: 40px;
+        }
+    }
+    .serviceFunction {
+        width: 90%;
+        margin: 20px auto;
+        &_title {
+            @include remove_heading_margin;
+            width: 100%;
+            overflow-wrap: normal;
+        }
+        &_image {
+            width: 100%;
+        }
+    }
+    .serviceFooter {
+        background-color: $gray;
+        height: 100px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #service {
+        .serviceTop {
+            &_title {
+                margin-left: 20px;
+            }
+            &_list {
+                margin-left: 20px;
+            }
+            .signup_button {
+                margin-left: 20px;
+            }
         }
     }
 }
