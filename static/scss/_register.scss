@@ -1,0 +1,74 @@
+@media screen and (min-width: 960px) {}
+
+#register {
+    .registerTop {
+        background-image: url("../images/horizontal_dumbelle_man.jpg");
+        background-size: cover;
+        background-position: center;
+        color: $white;
+        &_opacity {
+            padding-bottom: 10px;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0, 0, 0, 1), rgba(255, 255, 255, 0.1));
+        }
+        &_title {
+            @include remove_heading_margin;
+            padding-top: 160px;
+            margin-left: 40px;
+        }
+        &_list {
+            margin-left: 40px;
+            padding-top: 20px;
+            &_item {
+                .fa-check {
+                    padding-right: 10px;
+                    color: $orange;
+                }
+            }
+        }
+        .signup_button {
+            margin-left: 40px;
+        }
+    }
+    .registerFunction {
+        width: 90%;
+        margin: 72px auto 20px;
+        text-align: center;
+        &_title {
+            color: $black;
+            @include remove_heading_margin;
+            width: 100%;
+            overflow-wrap: normal;
+            margin-bottom: 24px;
+        }
+        &_text {
+            margin-bottom: 40px;
+        }
+        &_image {
+            width: 50%;
+        }
+    }
+    .registerFooter {
+        background-color: $gray;
+        padding: 72px 0;
+        .signup_button {
+            margin: 0 auto;
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #register {
+        .registerTop {
+            &_title {
+                margin-left: 20px;
+            }
+            &_list {
+                margin-left: 20px;
+            }
+            .signup_button {
+                margin-left: 20px;
+            }
+        }
+    }
+}

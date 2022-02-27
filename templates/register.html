@@ -1,12 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+	<div id="register">
+		<div class="registerTop">
+			<div class="registerTop_opacity">
+            	<div class="container">
+                <h1 class="registerTop_title">Welcome&nbsp;to&nbsp;FitHub&nbsp;Team!</h1>
+            	<ul class="registerTop_list">
+                    <li class="registerTop_list_item"><i class="fa-solid fa-check"></i>Add&nbsp;FitHub&nbsp;Offical&nbsp;LINE&nbsp;Account</li>
+                    <li class="registerTop_list_item"><i class="fa-solid fa-check"></i>Sustanable&nbsp;Motivation</li>
+                    <li class="registerTop_list_item"><i class="fa-solid fa-check"></i>Fitness&nbsp;Information</li>
+                    <li class="registerTop_list_item"><i class="fa-solid fa-check"></i>Link&nbsp;with&nbsp;your&nbsp;SNS</li>
+                </ul>
+				</div>
+        	</div>
+		</div>
+		<div class="container">
+			<div class="serviceFunction">
+				<div class="serviceFunction_container">
+					<h2 class="serviceFunction_title"><i class="fa-solid fa-circle-1"></i>STEP&nbsp;1:<br>Add&nbsp;FitHub&nbsp;Offical&nbsp;LINE&nbsp;Account</h2>
+					<p class="serviceFunction_text">Our sign up system is super easy.<br>Add FitHub Official LINE account to your friends.Once FitHub is added to your LINE friends, you are automatically signed up and ready to use FitHub!</p>
+					<img class="serviceFunction_image" src={{ url_for('static',filename='images/fithub_account.jpeg') }}>
+					<a href="https://lin.ee/xeIRSz5"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" border="0"></a>
+				</div>
+			</div>
+			<div class="serviceFunction">
+				<div class="serviceFunction_container">
+					<h2 class="serviceFunction_title">STEP&nbsp;2</h2>
+					<p class="serviceFunction_text">Join the FitHub team and start highlighting your continuity. To make your good start of fitness journey, we visualize your training logs.</p>
+					<img class="serviceFunction_image" src={{ url_for('static',filename='images/man_run.svg') }}>
+				</div>
+			</div>
+			<div class="serviceFunction">
+				<div class="serviceFunction_container">
+					<h2 class="serviceFunction_title">STEP&nbsp;3</h2>
+					<p class="serviceFunction_text">Join the FitHub team and start highlighting your continuity. To make your good start of fitness journey, we visualize your training logs.</p>
+					<img class="serviceFunction_image" src={{ url_for('static',filename='images/newsletter.svg') }}>
+				</div>
+			</div>
+    	</div>
+	</div>
 	<form action="/" method="POST" enctype="multipart/form-data">
 		<div>
 			<label for="name">名前:</label>
@@ -17,5 +49,4 @@
 		</div>
 	</form>
 	<a href="https://lin.ee/xeIRSz5"><img src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加" height="36" border="0"></a>
-</body>
-</html>
+{% endblock content %}
