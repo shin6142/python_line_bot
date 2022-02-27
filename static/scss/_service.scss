@@ -32,19 +32,28 @@
     }
     .serviceFunction {
         width: 90%;
-        margin: 20px auto;
+        margin: 72px auto 20px;
+        text-align: center;
         &_title {
+            color: $black;
             @include remove_heading_margin;
             width: 100%;
             overflow-wrap: normal;
+            margin-bottom: 24px;
+        }
+        &_text {
+            margin-bottom: 40px;
         }
         &_image {
-            width: 100%;
+            width: 50%;
         }
     }
     .serviceFooter {
         background-color: $gray;
-        height: 100px;
+        padding: 72px 0;
+        .signup_button {
+            margin: 0 auto;
+        }
     }
 }
 

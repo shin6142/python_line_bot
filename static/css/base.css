@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .header {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(41, 44, 47, 0.5);
   color: white;
   width: 100%;
   position: fixed;
@@ -123,23 +123,34 @@
 
 #service .serviceFunction {
   width: 90%;
-  margin: 20px auto;
+  margin: 72px auto 20px;
+  text-align: center;
 }
 
 #service .serviceFunction_title {
+  color: black;
   margin-top: 0;
   margin-bottom: 0;
   width: 100%;
   overflow-wrap: normal;
+  margin-bottom: 24px;
+}
+
+#service .serviceFunction_text {
+  margin-bottom: 40px;
 }
 
 #service .serviceFunction_image {
-  width: 100%;
+  width: 50%;
 }
 
 #service .serviceFooter {
   background-color: #292c2f;
-  height: 100px;
+  padding: 72px 0;
+}
+
+#service .serviceFooter .signup_button {
+  margin: 0 auto;
 }
 
 @media screen and (max-width: 480px) {
@@ -156,6 +167,7 @@
 
 body {
   margin: 0 auto;
+  font-family: Public Sans, sans-serif;
 }
 
 body .container {
