@@ -196,10 +196,6 @@
   color: #F9A826;
 }
 
-#register .registerTop .signup_button {
-  margin-left: 40px;
-}
-
 #register .registerFunction {
   width: 90%;
   margin: 72px auto 20px;
@@ -223,6 +219,18 @@
   width: 50%;
 }
 
+#register .registerFunction .friend_button {
+  margin: 20px auto 20px;
+}
+
+#register .registerFunction .friend_button_link {
+  display: block;
+}
+
+#register .registerFunction .friend_button_image {
+  width: 180px;
+}
+
 #register .registerFooter {
   background-color: #292c2f;
   padding: 72px 0;
@@ -230,6 +238,12 @@
 
 #register .registerFooter .signup_button {
   margin: 0 auto;
+}
+
+@media screen and (min-width: 960px) {
+  #register .registerFunction .br-sp {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 480px) {
