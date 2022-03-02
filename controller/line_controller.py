@@ -36,7 +36,7 @@ class LineConfig(object):
                 text="トレーニングの記録",
                 title="FitHub",
                 image_size="cover",
-                thumbnail_image_url="https://python-line-bot-0113.herokuapp.com/static/images/woman_yoga.svg",
+                thumbnail_image_url="https://python-line-bot-0113.herokuapp.com/static/images/vertical_man_headphones.jpg",
                 actions= [
                     {
                         "type": "uri",

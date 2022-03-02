@@ -24,6 +24,11 @@
                 }
             }
         }
+        .friend_button {
+            margin-left: 40px;
+            padding-top: 20px;
+            @include friend_button_image;
+        }
     }
     .registerFunction {
         width: 90%;
@@ -44,9 +49,7 @@
         }
         .friend_button {
             margin: 0 auto;
-            &_image {
-                width: 180px;
-            }
+            @include friend_button_image;
             &_text {
                 margin: 0 auto;
             }
@@ -63,10 +66,8 @@
 
 @media screen and (min-width: 960px) {
     #register {
-        .registerFunction {
-            .br-sp {
-                display: none;
-            }
+        .br-sp {
+            display: none;
         }
     }
 }

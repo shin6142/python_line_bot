@@ -196,6 +196,15 @@
   color: #F9A826;
 }
 
+#register .registerTop .friend_button {
+  margin-left: 40px;
+  padding-top: 20px;
+}
+
+#register .registerTop .friend_button_image {
+  width: 180px;
+}
+
 #register .registerFunction {
   width: 90%;
   margin: 72px auto 20px;
@@ -220,15 +229,15 @@
 }
 
 #register .registerFunction .friend_button {
-  margin: 20px auto 20px;
-}
-
-#register .registerFunction .friend_button_link {
-  display: block;
+  margin: 0 auto;
 }
 
 #register .registerFunction .friend_button_image {
   width: 180px;
+}
+
+#register .registerFunction .friend_button_text {
+  margin: 0 auto;
 }
 
 #register .registerFooter {
@@ -241,7 +250,7 @@
 }
 
 @media screen and (min-width: 960px) {
-  #register .registerFunction .br-sp {
+  #register .br-sp {
     display: none;
   }
 }
