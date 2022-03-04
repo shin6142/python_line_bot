@@ -26,7 +26,7 @@ class LineConfig(object):
     line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 
     def make_greeting_text(username):
-        greeting_text = f"はじめまして、FitHubです!\n友達登録・会員登録していただきありがとうございます!\nFitHubは{username}の健康的な習慣づくりをサポートしていきます!"
+        greeting_text = f"はじめまして、FitHubです!\n友達登録・会員登録していただきありがとうございます!\nFitHubは{username}さんの健康的な習慣づくりをサポートしていきます!"
         return greeting_text
 
     def make_button_template(user_id):
@@ -64,11 +64,12 @@ class message_submittion(LineConfig):
 
     def follow_event(event):
         profile = message_submittion.line_bot_api.get_profile(event.source.user_id)
+        line_id = profile.user_id
         username = profile.display_name
-        if model.get_user_by_name(username) == None:
-            model.add_user(username)
+        if model.get_user_by_name(line_id) == None:
+            model.add_user(username, line_id)
         greeting_text = message_submittion.make_greeting_text(username)
-        user = model.get_user_by_name(username)
+        user = model.get_user_by_line_id(line_id)
         user_id = user.id
         messages = message_submittion.make_button_template(user_id)
         message_submittion.line_bot_api.reply_message(

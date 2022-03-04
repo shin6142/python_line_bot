@@ -70,17 +70,7 @@ def send_message(user_id):
 # -----Web--------
 @app.route('/', methods=['GET'])
 def register_get():
-    return render_template('register.html', \
-        title = 'Form Sample(get)', \
-        message = '名前を入力して下さい。')
-
-
-@app.route('/', methods=['POST'])
-def register_post():
-    username = request.form['username']
-    model.add_user(username)
-    user = model.get_user_by_name(username)
-    return show_user_detail(user.id)
+    return render_template('register.html')
 
 
 @app.route('/check_in/<int:user_id>')

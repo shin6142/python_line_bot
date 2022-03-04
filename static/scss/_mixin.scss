@@ -22,3 +22,8 @@
         width: 180px;
     }
 }
+
+@mixin icon {
+    padding-right: 10px;
+    color: $orange;
+}

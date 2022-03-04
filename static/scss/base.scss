@@ -1,10 +1,11 @@
 @import "variables";
 @import "mixin";
+@import "calender";
 @import "header";
 @import "popup";
 @import "service";
 @import "register";
-@import "_user_detail";
+@import "user_detail";
 body {
     margin: 0 auto;
     font-family: Public Sans, sans-serif;
@@ -28,45 +29,6 @@ ul {
 
 .signup_button {
     @include signup_button
-}
-
-.today {
-    background-color: aqua;
-}
-
-.checkIn {
-    background-color: greenyellow;
-}
-
-#calendar {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-section {
-    margin: 10px;
-    width: 100%;
-}
-
-table {
-    width: 100%;
-    border-spacing: 0;
-    border-collapse: collapse;
-}
-
-td {
-    border: 1px solid #ddd;
-    padding: 5px;
-    text-align: center;
-    &:first-child {
-        color: red;
-    }
-    &:last-child {
-        color: royalblue;
-    }
-    &.is-disabled {
-        color: #ccc;
-    }
 }
 
 @media screen and (min-width: 481px) {}

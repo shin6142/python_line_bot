@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+<div id="user_detail_year">
+</div>
     <h2>年間の記録</h2>
     <a href={{ url_for('show_user_detail', user_id=id)}}>今月の記録</a>
     <a href={{ url_for('show_all_user')}}>友達の記録</a>

@@ -1,3 +1,12 @@
 @media screen and (min-width: 960px) {}
 
 @media screen and (max-width: 480px) {}
+
+#user_detail {
+    .container {
+        width: 90%;
+        #calendar {
+            @include calender;
+        }
+    }
+}

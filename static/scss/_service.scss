@@ -21,8 +21,7 @@
             padding-top: 20px;
             &_item {
                 .fa-check {
-                    padding-right: 10px;
-                    color: $orange;
+                    @include icon;
                 }
             }
         }

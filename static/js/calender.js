@@ -1,4 +1,4 @@
-const weeks = ['日', '月', '火', '水', '木', '金', '土'];
+const weeks = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 const month_dict = { 1: 'Jan', 2: 'Feb', 3: 'Mar', 4: 'Apr', 5: 'May', 6: 'Jun', 7: 'Jul', 8: 'Aug', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dec' };
 var date = new Date();
 var today_date = date.getDate();
@@ -54,7 +54,7 @@ class Calender {
                     calendarHtml += '<td class="is-disabled">' + num + '</td>'
                     dayCount++
                 } else {
-                    calendarHtml += "<td id=" + dayCount + '_' + month_dict[month] + ">" + dayCount + '</td>'
+                    calendarHtml += "<td id=" + dayCount + '_' + month_dict[month] + ">" + '<div class="stamp">' + dayCount + '</div>' + '</td>'
                     dayCount++
                 }
             }
