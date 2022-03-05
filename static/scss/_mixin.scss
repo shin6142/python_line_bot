@@ -27,3 +27,11 @@
     padding-right: 10px;
     color: $orange;
 }
+
+@mixin calender_stamp {
+    padding: 10px;
+    margin: 0 auto;
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+}

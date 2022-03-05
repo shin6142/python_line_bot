@@ -15,8 +15,8 @@
         <div class="black-background" id="js-black-bg"></div>
     </div>
     <div class="container">
-        <div id="calendar"></div>
         <h2 class="user_detail_username">{{ name }}さん</h2>
+        <div id="calendar"></div>
         <a class="user_detail_button" href={{ url_for('show_user_detail_year', user_id=id)}}>年間の記録</a>
         <a class="user_detail_button" href={{ url_for('show_all_user')}}>友達の記録</a>
         <a class="user_detail_button" href={{ url_for('check_in', user_id=id)}}>今日のトレーニングを記録</a>

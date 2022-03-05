@@ -45,7 +45,7 @@ class LineConfig(object):
                     },
                     {
                         "type": "uri",
-                        "label": "記録を確認する",
+                        "label": "マイページ",
                         "uri": f"https://python-line-bot-0113.herokuapp.com/user_detail/{user_id}"
                     },
                     {
