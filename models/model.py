@@ -74,4 +74,5 @@ def get_monthly_date_list(user_id):
     unique_date_list = list(dict.fromkeys(monthly_date_list))
     return unique_date_list
 
-
+line_id = "shinshinsihsinishi"
+print(get_user_by_line_id(line_id));
