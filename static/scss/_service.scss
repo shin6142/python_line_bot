@@ -29,9 +29,14 @@
             margin-left: 40px;
         }
     }
+    .service_heading {
+        text-align: center;
+        color: $gray;
+    }
     .serviceFunction {
+        color: $gray;
         width: 90%;
-        margin: 72px auto 20px;
+        margin: 46px auto 46px;
         text-align: center;
         &_title {
             color: $black;
@@ -45,6 +50,17 @@
         }
         &_image {
             width: 50%;
+        }
+        &_image {
+            width: 50%;
+        }
+        &_imageBlock {
+            margin: 0 auto 40px auto;
+            display: flex;
+            width: 80%;
+            &_image {
+                width: 50%;
+            }
         }
     }
     .serviceFooter {

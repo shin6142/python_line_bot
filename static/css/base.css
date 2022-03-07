@@ -121,9 +121,15 @@
   margin-left: 40px;
 }
 
+#service .service_heading {
+  text-align: center;
+  color: #292c2f;
+}
+
 #service .serviceFunction {
+  color: #292c2f;
   width: 90%;
-  margin: 72px auto 20px;
+  margin: 46px auto 46px;
   text-align: center;
 }
 
@@ -141,6 +147,22 @@
 }
 
 #service .serviceFunction_image {
+  width: 50%;
+}
+
+#service .serviceFunction_image {
+  width: 50%;
+}
+
+#service .serviceFunction_imageBlock {
+  margin: 0 auto 40px auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 80%;
+}
+
+#service .serviceFunction_imageBlock_image {
   width: 50%;
 }
 

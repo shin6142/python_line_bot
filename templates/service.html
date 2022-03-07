@@ -11,42 +11,48 @@
                     <li class="serviceTop_list_item"><i class="fa-solid fa-check"></i>Fitness&nbsp;Information</li>
                     <li class="serviceTop_list_item"><i class="fa-solid fa-check"></i>Link&nbsp;with&nbsp;your&nbsp;SNS</li>
                 </ul>
-                <a class="signup_button" href={{ url_for('register_get')}}>SIGN UP</a>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="serviceFunction">
             <div class="serviceFunction_container">
-                <h2 class="serviceFunction_title">あなたの習慣を可視化します。</h1>
-                <p class="serviceFunction_text">FitHubに参加してあなたの習慣を可視化しよう！FitHubではあなたのトレーニングを簡単に記録することができます。</p>
-                <img class="serviceFunction_image" src={{ url_for('static',filename='images/woman_calender.svg') }}>
+                <h1 class="serviceFunction_title">FitHubに参加しよう！</h1>
+                <p class="serviceFunction_text">FitHubは全て操作をあなたのLINEアカウントで行うことができます。友達追加をしてFitHubを始めよう！</p>
+                <img class="serviceFunction_image" src={{ url_for('static',filename='images/fithub_account.jpeg') }}>
+                <div class="friend_button">
+					<a class="friend_button_link" href="https://lin.ee/xeIRSz5"><img class="friend_button_image" src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加"></a>
+				</div>
             </div>
-            </div>
+        </div>
+        <h1 class="service_heading">FitHubでできること</h1>
         <div class="serviceFunction">
             <div class="serviceFunction_container">
-                <h2 class="serviceFunction_title">あなたのモチベーションをサポート</h2>
-                <p class="serviceFunction_text">FitHubはあなたの持続可能なモチベーションをサポートします。一緒に健康的な習慣継続を目指しましょう！</p>
-                <img class="serviceFunction_image" src={{ url_for('static',filename='images/man_run.svg') }}>
+                <h2 class="serviceFunction_title">あなたの習慣を可視化します。</h2>
+                <p class="serviceFunction_text">FitHubに参加してあなたの習慣を可視化しよう！FitHubではあなたのトレーニングを簡単に記録することができます。</p>
+                <img class="serviceFunction_image" src={{ url_for('static',filename='images/calender_phone.png') }}>
             </div>
         </div>
         <div class="serviceFunction">
             <div class="serviceFunction_container">
-                <h2 class="serviceFunction_title">&nbsp;FitHub&nbsp;News</h2>
-                <p class="serviceFunction_text">FitHubはフィットネスに関する情報を発信しています！</p>
-                <img class="serviceFunction_image" src={{ url_for('static',filename='images/newsletter.svg') }}>
+                <h2 class="serviceFunction_title">あなたのモチベーションをサポート</h2>
+                <p class="serviceFunction_text">FitHubはあなたの持続可能なモチベーションをサポートします。一緒に健康的な習慣継続を目指しましょう！</p>
+                <img class="serviceFunction_image" src={{ url_for('static',filename='images/calender_phone.png') }}>
             </div>
         </div>
         <div class="serviceFunction">
             <div class="serviceFunction_container">
                 <h2 class="serviceFunction_title">LINE&nbsp;連携</h2>
-                <p class="serviceFunction_text">Join the FitHub team and start highlighting your continuity. To make your good start of fitness journey, we visualize your training logs.</p>
-                <img class="serviceFunction_image" src={{ url_for('static',filename='images/chat.svg') }}>
+                <p class="serviceFunction_text">FitHubは全てLINEで完結！LINEから自分のトレーニング習慣を管理することができます！</p>
+                <div class="serviceFunction_imageBlock">
+                    <img class="serviceFunction_imageBlock_image" src={{ url_for('static',filename='images/fithub_account_phone.png')}}>
+                    <img class="serviceFunction_imageBlock_image" src={{ url_for('static',filename='images/screenshot01.png')}}>
+                </div>
+                <div class="friend_button">
+			        <a class="friend_button_link" href="https://lin.ee/xeIRSz5"><img class="friend_button_image" src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png" alt="友だち追加"></a>
+		        </div>
             </div> 
         </div>
     </div>
-    <footer class="serviceFooter">
-        <a class="signup_button" href={{ url_for('register_get')}}>SIGN UP</a>
-    </footer>
 </div>
 {% endblock content %}
