@@ -63,7 +63,7 @@ class message_submittion(LineConfig):
         profile = message_submittion.line_bot_api.get_profile(event.source.user_id)
         line_id = profile.user_id
         username = profile.display_name
-        if model.get_user_by_name(line_id) == None:
+        if model.get_user_by_line_id(line_id) == None:
             model.add_user(username, line_id)
         elif model.get_user_by_name(line_id) == True:
             pass
