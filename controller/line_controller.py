@@ -92,36 +92,33 @@ class message_submittion(LineConfig):
             message_submittion.line_bot_api.broadcast(messages=messages)
             # message_submittion.line_bot_api.push_message(MY_LINE_ID, messages)
 
-
-
-
 # richMenu
-# def make_rich_menu():
-#     rich_menu_to_create = RichMenu(
-#         size = RichMenuSize(width=2500, height=1686),
-#         selected = True,
-#         name = 'richmenu',
-#         chat_bar_text = 'メニュー',
-#         areas=[
-#             RichMenuArea(
-#                 bounds=RichMenuBounds(x=0, y=0, width=1273, height=868),
-#                 action=PostbackAction(data='renew')
-#             ),
-#             RichMenuArea(
-#                 bounds=RichMenuBounds(x=1278, y=0, width=1211, height=864),
-#                 action=PostbackAction(data='deadline')
-#             ),
-#             RichMenuArea(
-#                 bounds=RichMenuBounds(x=0, y=864, width=1268, height=818),
-#                 action=PostbackAction(data="not_submitted")
-#             ),
-#             RichMenuArea(
-#                 bounds=RichMenuBounds(x=1273, y=877, width=1227, height=805),
-#                 action=PostbackAction(data="forget")
-#             )
-#         ]
-#     )
-#     richMenuId = line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
-#     with open("static/image/man_run.svg", 'rb') as f:
-#         line_bot_api.set_rich_menu_image(richMenuId, "image/png", f)
-#     return line_bot_api.set_default_rich_menu(richMenuId)
+    def make_rich_menu():
+        rich_menu_to_create = RichMenu(
+            size = RichMenuSize(width=2500, height=1686),
+            selected = True,
+            name = 'richmenu',
+            chat_bar_text = 'メニュー',
+            areas=[
+                RichMenuArea(
+                    bounds=RichMenuBounds(x=0, y=0, width=1273, height=868),
+                    action=PostbackAction(data='renew')
+                ),
+                RichMenuArea(
+                    bounds=RichMenuBounds(x=1278, y=0, width=1211, height=864),
+                    action=PostbackAction(data='deadline')
+                ),
+                RichMenuArea(
+                    bounds=RichMenuBounds(x=0, y=864, width=1268, height=818),
+                    action=PostbackAction(data="not_submitted")
+                ),
+                RichMenuArea(
+                    bounds=RichMenuBounds(x=1273, y=877, width=1227, height=805),
+                    action=PostbackAction(data="forget")
+                )
+            ]
+        )
+        richMenuId = message_submittion.line_bot_api.create_rich_menu(rich_menu=rich_menu_to_create)
+        with open("static/image/man_run.svg", 'rb') as f:
+            message_submittion.line_bot_api.set_rich_menu_image(richMenuId, "images/newsletter.svg", f)
+        return message_submittion.line_bot_api.set_default_rich_menu(richMenuId)
