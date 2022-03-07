@@ -122,3 +122,6 @@ class message_submittion(LineConfig):
         with open("static/image/man_run.svg", 'rb') as f:
             message_submittion.line_bot_api.set_rich_menu_image(richMenuId, "images/newsletter.svg", f)
         return message_submittion.line_bot_api.set_default_rich_menu(richMenuId)
+
+object = message_submittion
+object.make_rich_menu()
