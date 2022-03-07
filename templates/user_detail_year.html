@@ -1,11 +1,41 @@
 {% extends 'base.html' %}
 {% block content %}
-<div id="user_detail_year">
+<div id="user_detail">
+    <div class="popup" id="js-popup">
+        <div class="popup-inner">
+            <div class="close-btn" id="js-close-btn">
+                <i class="fas fa-times"></i>
+            </div>
+                <p class="popup-inner_text">本日のトレーニングを記録しました!</p>
+                <img class="popup-inner_img" src={{ url_for('static',filename='images/woman_yoga.svg') }} alt="ポップアップ画像" height="140px" width="100%">
+                <p class="popup-inner_text">LINEで友達に報告しますか？</p>
+                <a href={{ url_for('send_message', user_id=id)}}>はい</a>
+                <a href={{ url_for('show_user_detail', user_id=id)}}>いいえ</a>
+        </div>
+        <div class="black-background" id="js-black-bg"></div>
+    </div>
+    <div class="user_detail">
+        <div class="container user_detail_container">
+            <h2 class="user_detail_username">{{ name }}さん</h2>
+            <div id="calendar"></div>
+            <div class="user_detail_menu">
+                <a class="user_detail_menu_block to-year" href={{ url_for('show_user_detail_year', user_id=id)}}>
+                    <span class="user_detail_menu_block_text">年間の記録</span>
+                    <img class="user_detail_menu_block_image" src={{ url_for('static',filename='images/woman_calender.svg') }}>
+                </a>
+                <a class="user_detail_menu_block all-user" href={{ url_for('show_all_user', user_id=id)}}>
+                    <span class="user_detail_menu_block_text">友達の記録</span>
+                    <img class="user_detail_menu_block_image" src={{ url_for('static',filename='images/friend_log.svg') }}>
+                </a>
+                <a class="user_detail_menu_block qrcode" href={{ url_for('qrcode', user_id=id)}}>
+                    <span class="user_detail_menu_block_text">チェックインQRコードを作成する</span>
+                    <img class="user_detail_menu_block_image" src={{ url_for('static',filename='images/download.svg') }}>
+                </a>
+            </div>
+            </ul>
+        </div>
+    </div>
 </div>
-    <h2>年間の記録</h2>
-    <a href={{ url_for('show_user_detail', user_id=id)}}>今月の記録</a>
-    <a href={{ url_for('show_all_user')}}>友達の記録</a>
-    <div id="calendar"></div>
     <script>
         var date_list_year = {{date_list_year|tojson}};
         var yearCalender = true;
