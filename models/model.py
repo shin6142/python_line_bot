@@ -73,3 +73,7 @@ def get_monthly_date_list(user_id):
             monthly_date_list.append(date.day)
     unique_date_list = list(dict.fromkeys(monthly_date_list))
     return unique_date_list
+
+
+db.drop_all()
+db.create_all() 
