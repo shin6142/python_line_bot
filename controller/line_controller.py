@@ -65,7 +65,7 @@ class message_submittion(LineConfig):
         username = profile.display_name
         if model.get_user_by_line_id(line_id) == None:
             model.add_user(username, line_id)
-        elif model.get_user_by_name(line_id) == True:
+        elif model.get_user_by_line_id(line_id) == True:
             pass
         greeting_text = message_submittion.make_greeting_text(username)
         user = model.get_user_by_line_id(line_id)
