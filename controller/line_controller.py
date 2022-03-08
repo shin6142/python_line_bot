@@ -48,7 +48,12 @@ class LineConfig(object):
                     {
                         "type": "uri",
                         "label": "本日のトレーニングを記録する",
-                        "uri": f"https://python-line-bot-0113.herokuapp.com/check_in/{user_id}"
+                        "uri": f"https://python-line-bot-0113.herokuapp.com/check_in/{user_id}",
+                    },
+                    {
+                        "type": "uri",
+                        "label": "認証ありcheckIn",
+                        "uri": "https://python-line-bot-0113.herokuapp.com/",
                     },
                 ]
             )

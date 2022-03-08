@@ -1,4 +1,4 @@
-from flask import Flask, request, abort, render_template
+from flask import Flask, request, abort, render_template, redirect
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -17,7 +17,7 @@ import os
 
 from sqlalchemy import false, true
 from models import model
-from controller import line_controller, qrcode_controller
+from controller import line_controller, qrcode_controller, authentication_controller, checkIn_controller
 
 app = Flask(__name__, static_folder='static') 
 
@@ -70,21 +70,17 @@ def send_message(user_id):
 # -----Web--------
 @app.route('/', methods=['GET'])
 def register_get():
-    return render_template('register.html')
+    authenticator = authentication_controller.LineAuthentication
+    return authenticator.index()
+
+@app.route('/line/login')
+def line_login():
+    return authentication_controller.LineAuthentication.line_login()
 
 
 @app.route('/check_in/<int:user_id>')
 def check_in(user_id):
-    user = model.get_user(user_id)
-    date_list = model.get_monthly_date_list(user_id)
-    import datetime
-    dt_now = datetime.date.today()
-    for stamp in date_list:
-        if stamp == dt_now.day:
-            return render_template('user_detail.html', id=user.id, name=user.username, date_list=date_list, is_first=False)
-    model.add_stamp(user_id)
-    date_list = model.get_monthly_date_list(user_id)
-    return render_template('user_detail.html', id=user.id, name=user.username, date_list=date_list, is_first=True)
+    return checkIn_controller.check_in(user_id);
 
 @app.route('/user_detail/<int:user_id>')
 def show_user_detail(user_id):
