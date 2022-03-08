@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user_profile["name"] }}</title>
+</head>
+<body>
+
+<h2>{{ user_profile["name"] }}</h2>
+<h3>ユーザID:{{ user_profile["sub"] }}</h3>
+
+{% if user_profile["sub"] == "Uf99b1df30e7b3dd51c20765ddad665ea" %}
+    <p>認証成功</p>
+{% endif %}
+
+</body>
+</html>
