@@ -9,8 +9,10 @@
                 <p class="popup-inner_text">本日のトレーニングを記録しました!</p>
                 <img class="popup-inner_img" src={{ url_for('static',filename='images/woman_yoga.svg') }} alt="ポップアップ画像" height="140px" width="100%">
                 <p class="popup-inner_text">LINEで友達に報告しますか？</p>
-                <a href={{ url_for('send_message', user_id=id)}}>はい</a>
-                <a href={{ url_for('show_user_detail', user_id=id)}}>いいえ</a>
+                <div class="popup-inner_buttons">
+                    <a class="popup-inner_button" href={{ url_for('send_message', user_id=id)}}>はい</a>
+                    <a class="popup-inner_button popup-inner_button-no" href={{ url_for('show_user_detail', user_id=id)}}>いいえ</a>
+                </div>
         </div>
         <div class="black-background" id="js-black-bg"></div>
     </div>
@@ -23,10 +25,11 @@
                     <span class="user_detail_menu_block_text">年間の記録</span>
                     <img class="user_detail_menu_block_image" src={{ url_for('static',filename='images/man_run.svg') }}>
                 </a>
-                <a class="user_detail_menu_block all-user" href={{ url_for('show_all_user', user_id=id)}}>
+                <a class="user_detail_menu_block all-user">
                     <span class="user_detail_menu_block_text">友達の記録</span>
                     <img class="user_detail_menu_block_image" src={{ url_for('static',filename='images/friend_log.svg') }}>
                 </a>
+                <span>*現在ご利用になれません。アップデートをお待ちください。</span>
                 <a class="user_detail_menu_block qrcode" href={{ url_for('qrcode', user_id=id)}}>
                     <span class="user_detail_menu_block_text">チェックインQRコード作成</span>
                     <img class="user_detail_menu_block_image" src={{ url_for('static',filename='images/download.svg') }}>

@@ -69,8 +69,8 @@ def send_message(user_id):
 
 # -----Web--------
 @app.route('/', methods=['GET'])
-def register_get():
-    return render_template('register.html')
+def show_service_page():
+    return render_template('service.html')
 
 
 @app.route('/check_in/<int:user_id>')
@@ -108,12 +108,6 @@ def show_all_user():
 @app.route("/create_qr/<int:user_id>")
 def qrcode(user_id):
     return qrcode_controller.create_qrcode(user_id)
-
-
-
-@app.route('/service')
-def show_service_page():
-    return render_template('service.html')
 
 
 if __name__ == "__main__":

@@ -38,7 +38,7 @@ class LineConfig(object):
                     {
                         "type": "uri",
                         "label": "FitHubの使い方をみる",
-                        "uri": f"https://python-line-bot-0113.herokuapp.com/service"
+                        "uri": f"https://python-line-bot-0113.herokuapp.com/"
                     },
                     {
                         "type": "uri",

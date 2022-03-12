@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>FitHub Member's Logs</h2>
     {% for user in users %}
         <a href={{ url_for('show_user_detail', user_id=user.id)}}>{{user.username}}</a>
     {% endfor %}

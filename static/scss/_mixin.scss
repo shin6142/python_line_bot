@@ -3,6 +3,10 @@
     margin-bottom: 0;
 }
 
+@mixin alert {
+    font-size: 5px;
+}
+
 @mixin signup_button {
     border: 1px solid $orange;
     border-radius: 24px;

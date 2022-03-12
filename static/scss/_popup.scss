@@ -24,9 +24,22 @@
         z-index: 2;
         &_text {
             text-align: center;
+            font-weight: bold;
         }
-        img {
+        &_img {
             width: 100%;
+        }
+        &_buttons {
+            display: flex;
+            margin: 0 auto;
+        }
+        &_button {
+            margin: 10px;
+            @include signup_button;
+        }
+        &_button-no {
+            border: 1px solid $lightGray;
+            background-color: $lightGray;
         }
     }
     .close-btn {
