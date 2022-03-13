@@ -11,6 +11,8 @@ from linebot.models import (
     )
 from linebot.models.actions import PostbackAction
 import os
+from urllib.parse import urlencode
+import urllib.parse
 import hashlib
 
 from models import model
@@ -28,7 +30,12 @@ class LineConfig(object):
         greeting_text = f"はじめまして、FitHubです!\n友達登録・会員登録していただきありがとうございます!\nFitHubは{username}さんの健康的な習慣づくりをサポートしていきます!"
         return greeting_text
 
-    def make_button_template(user_id):
+    def make_button_template(user_id, hash_line_id):
+        checkIn_base = f"https://python-line-bot-0113.herokuapp.com/check_in/{user_id}"
+        query = {
+            'key': hash_line_id,
+        }
+        checkIn_url = '%s?%s' % (checkIn_base, urlencode(query))
         message_template = TemplateSendMessage(
             alt_text="FitHubからのお知らせ",
             template=ButtonsTemplate(
@@ -50,7 +57,7 @@ class LineConfig(object):
                     {
                         "type": "uri",
                         "label": "本日のトレーニングを記録する",
-                        "uri": f"https://python-line-bot-0113.herokuapp.com/check_in/{user_id}"
+                        "uri": checkIn_url
                     },
                 ]
             )
@@ -73,7 +80,8 @@ class message_submittion(LineConfig):
         greeting_text = message_submittion.make_greeting_text(username)
         user = model.get_user_by_line_id(line_id)
         user_id = user.id
-        messages = message_submittion.make_button_template(user_id)
+        hash_line_id = user.hash_line_id
+        messages = message_submittion.make_button_template(user_id, hash_line_id)
         message_submittion.line_bot_api.reply_message(
             event.reply_token,
             [TextSendMessage(text=greeting_text), messages]
