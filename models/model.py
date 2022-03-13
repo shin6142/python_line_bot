@@ -76,6 +76,3 @@ def get_monthly_date_list(user_id):
     return unique_date_list
 
 
-
-db.drop_all()
-db.create_all()
