@@ -31,7 +31,7 @@ class LineConfig(object):
         return greeting_text
 
     def make_button_template(user_id, hash_line_id):
-        service_url = f"https://python-line-bot-0113.herokuapp.com/"
+        service_url = "https://python-line-bot-0113.herokuapp.com/"
         mypage_url = f"https://python-line-bot-0113.herokuapp.com/user_detail/{user_id}/{hash_line_id}"
         checkin_url = f"https://python-line-bot-0113.herokuapp.com/check_in/{user_id}/{hash_line_id}"
         message_template = TemplateSendMessage(
