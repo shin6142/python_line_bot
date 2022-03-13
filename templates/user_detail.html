@@ -10,8 +10,8 @@
                 <img class="popup-inner_img" src={{ url_for('static',filename='images/woman_yoga.svg') }} alt="ポップアップ画像" height="140px" width="100%">
                 <p class="popup-inner_text">LINEで友達に報告しますか？</p>
                 <div class="popup-inner_buttons">
-                    <a class="popup-inner_button" href={{ url_for('send_message', user_id=id)}}>はい</a>
-                    <a class="popup-inner_button popup-inner_button-no" href={{ url_for('show_user_detail', user_id=id)}}>いいえ</a>
+                    <a class="popup-inner_button" href={{ url_for('send_message', user_id=id, hash_line_id=hash_line_id)}}>はい</a>
+                    <a class="popup-inner_button popup-inner_button-no" href={{ url_for('show_user_detail', user_id=id, hash_line_id=hash_line_id)}}>いいえ</a>
                 </div>
         </div>
         <div class="black-background" id="js-black-bg"></div>
