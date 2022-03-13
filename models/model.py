@@ -16,6 +16,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80))
     line_id = db.Column(db.String(80), unique=True)
+    hash_line_id = db.Column(db.String(80), unique=True)
     stamps = relationship("Stamp")
 
 
@@ -28,9 +29,9 @@ class Stamp(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
-def add_user(username, line_id):
+def add_user(username, line_id, hash_line_id):
     if username != 'favicon.ico':
-        new_user = User(username=username, line_id=line_id)
+        new_user = User(username=username, line_id=line_id, hash_line_id=hash_line_id)
         db.session.add(new_user)
         db.session.commit()
 
@@ -73,3 +74,8 @@ def get_monthly_date_list(user_id):
             monthly_date_list.append(date.day)
     unique_date_list = list(dict.fromkeys(monthly_date_list))
     return unique_date_list
+
+
+
+db.drop_all()
+db.create_all()

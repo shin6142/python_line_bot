@@ -11,6 +11,8 @@ from linebot.models import (
     )
 from linebot.models.actions import PostbackAction
 import os
+import hashlib
+
 from models import model
 
 
@@ -63,8 +65,9 @@ class message_submittion(LineConfig):
         profile = message_submittion.line_bot_api.get_profile(event.source.user_id)
         line_id = profile.user_id
         username = profile.display_name
+        hash_line_id = hashlib.sha256(line_id.encode("utf-8")).hexdigest()
         if model.get_user_by_line_id(line_id) == None:
-            model.add_user(username, line_id)
+            model.add_user(username, line_id, hash_line_id)
         elif model.get_user_by_line_id(line_id) == True:
             pass
         greeting_text = message_submittion.make_greeting_text(username)
