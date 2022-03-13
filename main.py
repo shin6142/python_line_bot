@@ -61,9 +61,9 @@ def reply_text(event):
     return line_controller.message_submittion.handle_message(event)
 
 
-@app.route("/send_message/<int:user_id>")
-def send_message(user_id):
-    return line_controller.message_submittion.notify_checkin(user_id)
+@app.route("/send_message/<int:user_id>/<string:hash_line_id>")
+def send_message(user_id, hash_line_id):
+    return line_controller.message_submittion.notify_checkin(user_id, hash_line_id)
 # ----LINE bot------
 
 
@@ -85,7 +85,7 @@ def check_in(user_id, hash_line_id):
     dt_now = datetime.date.today()
     for stamp in date_list:
         if stamp == dt_now.day:
-            return render_template('user_detail.html', id=user.id, name=user.username, date_list=date_list, is_first=False)
+            return render_template('user_detail.html', id=user.id, name=user.username, hash_line_id=user.hash_line_id, date_list=date_list, is_first=False)
     model.add_stamp(user_id)
     date_list = model.get_monthly_date_list(user_id)
     return render_template('user_detail.html', id=user.id, name=user.username, hash_line_id=user.hash_line_id, date_list=date_list, is_first=True)
