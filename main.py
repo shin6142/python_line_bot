@@ -109,6 +109,10 @@ def show_all_user():
 def qrcode(user_id):
     return qrcode_controller.create_qrcode(user_id)
 
+@app.route('/referrer')
+def referrer():
+    return render_template('test.html')
+
 
 if __name__ == "__main__":
     port = int(os.getenv("PORT", 5000))
