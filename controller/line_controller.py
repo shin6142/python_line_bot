@@ -31,15 +31,13 @@ class LineConfig(object):
         return greeting_text
 
     def make_button_template(user_id, hash_line_id):
-        checkIn_base = f"https://python-line-bot-0113.herokuapp.com/check_in/{user_id}"
-        query = {
-            'key': hash_line_id,
-        }
-        checkIn_url = '%s?%s' % (checkIn_base, urlencode(query))
+        service_url = f"https://python-line-bot-0113.herokuapp.com/"
+        mypage_url = f"https://python-line-bot-0113.herokuapp.com/user_detail/{user_id}/{hash_line_id}"
+        checkin_url = f"https://python-line-bot-0113.herokuapp.com/check_in/{user_id}/{hash_line_id}"
         message_template = TemplateSendMessage(
             alt_text="FitHubからのお知らせ",
             template=ButtonsTemplate(
-                text="トレーニングの記録",
+                text="FitHubへようこそ!",
                 title="FitHub",
                 image_size="cover",
                 thumbnail_image_url="https://python-line-bot-0113.herokuapp.com/static/images/vertical_man_headphones.jpg",
@@ -47,17 +45,17 @@ class LineConfig(object):
                     {
                         "type": "uri",
                         "label": "FitHubの使い方をみる",
-                        "uri": f"https://python-line-bot-0113.herokuapp.com/"
+                        "uri": service_url
                     },
                     {
                         "type": "uri",
                         "label": "マイページ",
-                        "uri": f"https://python-line-bot-0113.herokuapp.com/user_detail/{user_id}"
+                        "uri": mypage_url
                     },
                     {
                         "type": "uri",
                         "label": "本日のトレーニングを記録する",
-                        "uri": checkIn_url
+                        "uri": checkin_url
                     },
                 ]
             )
@@ -93,7 +91,7 @@ class message_submittion(LineConfig):
             TextSendMessage(text=event.message.text)
         )
 
-    
+ 
     def notify_checkin(user_id):
         user = model.get_user(user_id)
         username = user.username

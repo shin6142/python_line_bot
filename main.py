@@ -73,9 +73,13 @@ def show_service_page():
     return render_template('service.html')
 
 
-@app.route('/check_in/<int:user_id>')
-def check_in(user_id):
+@app.route('/check_in/<int:user_id>/<str:hash_line_id>')
+def check_in(user_id, hash_line_id):
     user = model.get_user(user_id)
+    if user.hash_line_id != hash_line_id:
+        return render_template('service.html')
+    elif user.hash_line_id == hash_line_id:
+        pass
     date_list = model.get_monthly_date_list(user_id)
     import datetime
     dt_now = datetime.date.today()
@@ -84,20 +88,28 @@ def check_in(user_id):
             return render_template('user_detail.html', id=user.id, name=user.username, date_list=date_list, is_first=False)
     model.add_stamp(user_id)
     date_list = model.get_monthly_date_list(user_id)
-    return render_template('user_detail.html', id=user.id, name=user.username, date_list=date_list, is_first=True)
+    return render_template('user_detail.html', id=user.id, name=user.username, hash_line_id=user.hash_line_id, date_list=date_list, is_first=True)
 
-@app.route('/user_detail/<int:user_id>')
-def show_user_detail(user_id):
+@app.route('/user_detail/<int:user_id>/<str:hash_line_id>')
+def show_user_detail(user_id, hash_line_id):
     user = model.get_user(user_id)
+    if user.hash_line_id != hash_line_id:
+            return render_template('service.html')
+    elif user.hash_line_id == hash_line_id:
+        pass
     date_list = model.get_monthly_date_list(user_id)
-    return render_template('user_detail.html', id=user.id, name=user.username, date_list=date_list, is_first=False)
+    return render_template('user_detail.html', id=user.id, name=user.username, hash_line_id=user.hash_line_id, date_list=date_list, is_first=False)
 
 
-@app.route('/user_detail_year/<int:user_id>')
-def show_user_detail_year(user_id):
+@app.route('/user_detail_year/<int:user_id>/<str:hash_line_id>')
+def show_user_detail_year(user_id, hash_line_id):
     user = model.get_user(user_id)
+    if user.hash_line_id != hash_line_id:
+            return render_template('service.html')
+    elif user.hash_line_id == hash_line_id:
+        pass
     date_list_year = model.get_check_in_date_list(user_id)
-    return render_template('user_detail_year.html', id=user.id, name=user.username, date_list_year=date_list_year)
+    return render_template('user_detail_year.html', id=user.id, name=user.username, hash_line_id=user.hash_line_id, date_list_year=date_list_year)
 
 
 @app.route('/all_user')
@@ -105,9 +117,9 @@ def show_all_user():
     users_list = model.get_all_user()
     return render_template('all_user_list.html', users=users_list)
 
-@app.route("/create_qr/<int:user_id>")
-def qrcode(user_id):
-    return qrcode_controller.create_qrcode(user_id)
+@app.route("/create_qr/<int:user_id>/<str:hash_line_id>")
+def qrcode(user_id, hash_line_id):
+    return qrcode_controller.create_qrcode(user_id, hash_line_id)
 
 @app.route('/referrer')
 def referrer():
