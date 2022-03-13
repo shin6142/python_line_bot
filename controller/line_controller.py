@@ -87,7 +87,7 @@ class message_submittion(LineConfig):
         user = model.get_user(user_id)
         username = user.username
         if username != 'favicon.ico':
-            messages = TextSendMessage(text=f'{username}がジムにチェックインしました')
+            messages = TextSendMessage(text=f'{username}がトレーニンングを開始しました。')
             message_submittion.line_bot_api.broadcast(messages=messages)
             # message_submittion.line_bot_api.push_message(MY_LINE_ID, messages
 

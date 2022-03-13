@@ -3,4 +3,5 @@ __pycache__
 .env
 db.py
 .DS_Store
+test
 test.py
