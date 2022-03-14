@@ -97,5 +97,6 @@ class message_submittion(LineConfig):
         username = user.username
         if username != 'favicon.ico':
             messages = TextSendMessage(text=f'{username}がトレーニンングを開始しました。')
-            message_submittion.line_bot_api.broadcast(messages=messages)
+            return message_submittion.line_bot_api.broadcast(messages=messages)
             # message_submittion.line_bot_api.push_message(MY_LINE_ID, messages
+            

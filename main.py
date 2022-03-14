@@ -63,7 +63,8 @@ def reply_text(event):
 
 @app.route("/send_message/<int:user_id>/<string:hash_line_id>")
 def send_message(user_id, hash_line_id):
-    return line_controller.message_submittion.notify_checkin(user_id, hash_line_id)
+    line_controller.message_submittion.notify_checkin(user_id)
+    return show_user_detail(user_id, hash_line_id)
 # ----LINE bot------
 
 
