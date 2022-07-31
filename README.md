@@ -26,4 +26,11 @@ You can take a look from [here](https://python-line-bot-0113.herokuapp.com/).
 - Web Framework
   - Flask
 - API
-  - [LINE Developer API](https://developers.line.biz/en/)     
+  - [LINE Developer API](https://developers.line.biz/en/)
+- Database
+  - MySQL
+- Infrastructure
+  - Heroku
+  
+# DB model
+![image](https://user-images.githubusercontent.com/62780815/182008811-d9c2f123-d0af-41b5-a49f-2f688d4a6d37.png)
